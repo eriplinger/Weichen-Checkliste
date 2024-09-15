@@ -1,0 +1,36 @@
+Art;Typ;Anlagennr;SAP-Nr.;Einbauort;Einbau Ur-Weiche;Erneuerung;Stammgleis;Zweiggleis
+Weiche;Auﬂenbogenweiche (ABW);61;S-IS-00002-B0001-W0061;Gleis_Seilbahn Talseite;28.10.1928;14.10.2015;002: Hauptgleis;002.001: Ausweiche
+Weiche;Auﬂenbogenweiche (ABW);62;S-IS-00002-B0001-W0062;Gleis_Seilbahn Bergseite;28.10.1928;14.10.2015;002: Hauptgleis;002.001: Ausweiche
+Weiche;Innenbogenweiche (IBW);114;S-IS-00400-B0001-W0114;Kehrgleis Vogelrain (Heslach);15.01.1984;14.10.2015;400: Ausw‰rtsgleis;400.001: Kehrgleis Li 14, W0117-W0114
+Weiche;Einfache Weiche (EW);115;S-IS-00400-B0006-W0115;Kehrgleis Vogelrain (Heslach) ;01.03.1984;14.10.2015;400.001: Kehrgleis Li 14, W0117-W0114;400.006: GW Heslach W0116-W0115
+Weiche;Auﬂenbogenweiche (ABW);116;S-IS-00400-B0006-W0116;Kehrgleis Vogelrain (Heslach);15.01.1984;14.10.2015;400: Einw‰rtsgleis;400.006: GW Heslach W0116-W0115
+Weiche;Innenbogenweiche (IBW);117;S-IS-00400-B0001-W0117;Kehrgleis Vogelrain (Heslach);01.01.1984;14.10.2015;400: Ausw‰rtsgleis;400.001: Kehrgleis Li 14, W0117-W0114
+Weiche;Auﬂenbogenweiche (ABW);118;S-IS-00400-B0005-W0118;GLw. Vogelrain (Heslach);01.01.1984;14.10.2015;400: Einw‰rtsgleis;400.005: GW Heslach W0119-W0118
+Weiche;Einfache Weiche (EW);119;S-IS-00400-B0005-W0119;Vogelrain (Heslach) Glw.;01.01.1984;14.10.2015;400: Ausw‰rtsgleis;400.005: GW Heslach W0119-W0118
+Weiche;Einfache Weiche (EW);120;S-IS_00059-B0004-W0120;Einfahrt, Halle Heslach;01.01.1984;14.10.2015;400: Ausw‰rtsgleis;059.004: Gleis 4, Ein- und Ausfahrtsgleis
+Weiche;Auﬂenbogenweiche (ABW);121;S-IS-00059-B0003-W0121;Einfahrt Halle Heslach;01.01.1984;14.10.2015;400: Ausw‰rtsgleis;059.003: GW Heslach, W0124-W3902
+Weiche;Innenbogenweiche (IBW);122;S-IS-0400-B0004-W0122;Weiche_VR_(Vogelrain);;14.10.2015;400: Ausw‰rtsgleis;400.004: GW Heslach W0123-W0122
+Weiche;Innenbogenweiche (IBW);123;S-IS-00400-B0004-W0123;Weiche_VR_(Vogelrain);;14.10.2015;400: Einw‰rtsgleis;400.004: GW Heslach W0123-W0122
+Weiche;Auﬂenbogenweiche (ABW);124;S-IS-00059-B0002-W0124;Weiche_VR_(Vogelrain);01.06.1984;14.10.2015;400: Ausw‰rtsgleis;059.003: GW Heslach, W0124-W3902
+Weiche;Innenbogenweiche (IBW);125;S-IS-00400-B0003-W0125;Weiche_VR_(Vogelrain);01.01.1984;14.10.2015;400: Ausw‰rtsgleis;400.003: GW S¸dheimer Platz W0125-W0126
+Weiche;Innenbogenweiche (IBW);126;S-IS-00400-B0003-W0126;VR_(Vogelrain);01.06.1984;14.10.2015;400: Einw‰rtsgleis;400.003: GW S¸dheimer Platz W0125-W0126
+Weiche;Innenbogenweiche (IBW);3901;S-IS-00059-B0002-W3901;Betriebshof Heslach (Abstellgleis);01.04.1984;14.10.2015;059.004: Gleis 4, Ein- und Ausfahrtsgleis;059.002: GW S¸dheimer Platz, W0124-W3901
+Weiche;Innenbogenweiche (IBW);3902;S-IS-00059-B0003-W3902;Betriebshof Heslach (Zu-/Ausfahrt);01.03.1984;14.10.2015;059.004: Gleis 4, Ein- und Ausfahrtsgleis;059.003: GW Heslach, W0124-W3902
+Weiche;Einfache Weiche (EW);3903;S-IS-00059-B0019-W3903;Betriebshof Heslach (Zu-/Ausfahrt);01.03.1984;14.10.2015;059.004: Gleis 4, Ein- und Ausfahrtsgleis;059.019: Halle Gleis 19
+Weiche;Einfache Weiche (EW);3904;S-IS-00059-B0006-W3904;Betriebshof Heslach (Zu-/Ausfahrt);01.02.1989;14.10.2015;059.019: Halle Gleis 19;059.006: Halle Gleis 6
+Weiche;Einfache Weiche (EW);3905;S-IS-00059-B0007-W3905;Betriebshof Heslach Gleis 7;01.03.1984;14.10.2015;059.006: Halle Gleis 6;059.007: Halle Gleis 7
+Weiche;Einfache Weiche (EW);3906;S-IS-00059-B0005-W3906;Betriebshof Heslach Gleis 5;01.03.1984;14.10.2015;059.006: Halle Gleis 6;059.005: Halle Gleis 5
+Weiche;Einfache Weiche (EW);3907;S-IS-00059-B0010-W3907;Betriebshof Heslach Gleis 10;;14.10.2015;059.019: Halle Gleis 19;059.010: Halle Gleis 10
+Weiche;Innenbogenweiche (IBW);3908;S-IS-00059-B0009-W3908;Betriebshof Heslach Gleis 9;01.03.1984;14.10.2015;059.010: Halle Gleis 10;059.009: Halle Gleis 9
+Weiche;Innenbogenweiche (IBW);3909;S-IS-00059-B0008-W3909;Betriebshof Heslach Gleis 8;01.03.1984;14.10.2015;059.009: Halle Gleis 9;059.008: Halle Gleis 8
+Weiche;Einfache Weiche (EW);3910;S-IS-00059-B0012-W3910;Betriebshof Heslach Gleis 12;01.03.1984;14.10.2015;059.019: Halle Gleis 19;059.012: Halle Gleis 12
+Weiche;Innenbogenweiche (IBW);3911;S-IS-00059-B0011-W3911;Betriebshof Heslach Gleis 11;;14.10.2015;059.012: Halle Gleis 12;059.011: Halle Gleis 11
+Weiche;Innenbogenweiche (IBW);3912;S-IS-00059-B0014-W3912;Betriebshof Heslach Gleis 14;01.03.1984;14.10.2015;059.019: Halle Gleis 19;059.014: Halle Gleis 14
+Weiche;Innenbogenweiche (IBW);3913;S-IS-00059-B0013-W3913;Betriebshof Heslach Gleis 13;01.03.1984;14.10.2015;059.014: Halle Gleis 14;059.013: Halle Gleis 13
+Weiche;Einfache Weiche (EW);3914;S-IS-00059-B0017-W3914;Betriebshof Heslach Gleis 17;01.03.1984;14.10.2015;059.019: Halle Gleis 19;059.017: Halle Gleis 17
+Weiche;Einfache Weiche (EW);3915;S-IS-00059-B0015-W3915;Betriebshof Heslach Gleis 15;01.03.1984;14.10.2015;059.017: Halle Gleis 17;059.015: Halle Gleis 15
+Weiche;Einfache Weiche (EW);3916;S-IS-00059-B0016-W3916;Betriebshof Heslach Gleis 16;01.03.1984;14.10.2015;059.017: Halle Gleis 17;059.016: Halle Gleis 16
+Weiche;Einfache Weiche (EW);3917;S-IS-00059-B0018-W3917;Betriebshof Heslach Gleis 18;01.03.1984;14.10.2015;059.019: Halle Gleis 19;059.018: Halle Gleis 18
+Weiche;Innenbogenweiche (IBW);533;S-IS-00300-B0004-W0533;Glw. Peregrinastraﬂe (ausw‰rts);20.08.1986;14.06.2015;300: Ausw‰rtsgleis;300.004: Gleis 4 Albstraﬂe
+Weiche;Einfache Weiche (EW);539;S-IS-00300-B0003-W0539;Glw. Weinsteige (stadtausw‰rts);01.02.1985;18.04.2017;300: Ausw‰rtsgleis;300.003: Weinsteige
+Weiche;Einfache Weiche (EW);538;S-IS-00300-B0003-W0538;Glw. Weinsteige (stadteinw‰rts);01.02.1986;18.04.2017;300: Einw‰rtsgleis;300.003: Weinsteige

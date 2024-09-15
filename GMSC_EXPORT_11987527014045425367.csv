@@ -1,0 +1,164 @@
+Art;Typ;Anlagennr;SAP-Nr.;Einbauort;Einbau Ur-Weiche;Erneuerung;Stammgleis;Zweiggleis;LETZTE_INSTANDHALTUNG;GW201_ID1
+Weiche;Einfache Weiche (EW);112;S-IS-00400-B0007-W0112;Glw Reute;01.05.1986;23.06.2018;400: Einwärtsgleis;400.007: GW Kaltentaler Abfahrt/Reute W0113-W0113/1;;2.090
+Weiche;Einfache Weiche (EW);113;S-IS-00400-B0007-W0113;Glw. Reute;01.03.1986;23.06.2018;400: Auswärtsgleis;400.007: GW Kaltentaler Abfahrt/Reute W0113-W0113/1;;2.099
+Weiche;Innenbogenweiche (IBW);533;S-IS-00300-B0004-W0533;Glw. Peregrinastraße (auswärts);20.08.1986;23.06.2018;300: Auswärtsgleis;300.004: Gleis 4 Albstraße;;2.450
+Weiche;Einfache Weiche (EW);534;S-IS-00300-B0004-W0534;Glw. Peregrinastraße (einwärts);20.08.1986;23.06.2018;300: Einwärtsgleis;300.004: Gleis 4 Albstraße;;2.461
+Weiche;Einfache Weiche (EW);535;S-IS-00300-B0005-W0535;Abzweig Kehranlage Peregrinastraße;20.08.1986;23.06.2018;300: Einwärtsgleis;300.005: Gleis 5 Albstraße;;2.472
+Weiche;Einfache Weiche (EW);639;S-IS-00340-A0000-W0639;Abzweig Pflugmühle;01.02.1982;23.06.2018;330: Auswärtsgleis;340: Auswärtsgleis;;2.914
+Weiche;Einfache Weiche (EW);640;S-IS-00340-E0000-W0640;Abzweig Pflugmühle (stadteinwärts);01.02.1982;23.06.2018;330: Einwärtsgleis;340: Einwärtsgleis;;2.923
+Weiche;Kombiweiche (KW);650;S-IS-00300-B0007-W0650;Bahnhof Möhringen;01.03.1987;23.06.2018;300: Einwärtsgleis;300.007: Gleis 7 Möhringen Bhf.;;2.577
+Weiche;Kombiweiche (KW);651;S-IS-00300-B0007-W0651;Bahnhof Möhringen;01.03.1987;23.06.2018;300: Auswärtsgleis;300.007: Gleis 7 Möhringen Bhf.;;2.588
+Weiche;Kombiweiche (KW);652;S-IS-00300-B0008-W0652;Bahnhof Möhringen;15.01.1990;23.06.2018;300: Auswärtsgleis;300.008: Gleis 8 Möhringen Bhf.;;2.600
+Weiche;Außenbogenweiche (ABW);653;S-IS-00300-B0009-W0653;Bahnhof Möhringen;10.01.1990;23.06.2018;300.009: Gleis 9 Möhringen Bhf.;300.008: Gleis 8 Möhringen Bhf.;;2.611
+Weiche;Außenbogenweiche (ABW);654;S-IS-00320-E0000-W0654;Bahnhof Möhringen;01.02.1985;23.06.2018;330: Auswärtsgleis;320: Einwärtsgleis;;2.396
+Weiche;Außenbogenweiche (ABW);3001;S-IS-00331-A0000-W3001;Abzweig Wallgraben / Dürrlewang;08.08.2014;23.06.2018;330: Auswärtsgleis;331: Auswärtsgleis;;2.726.142
+Weiche;Außenbogenweiche (ABW);3002;S-IS-00331-E0000-W3002;Abzweig Wallgraben /Dürrlewang;08.08.2014;23.06.2018;330: Einwärtsgleis;331: Einwärtsgleis;;2.726.143
+Weiche;Außenbogenweiche (ABW);3005;S-IS-00331-E0000-W3005;Dürrlewang;04.04.2016;23.06.2018;331: Auswärtsgleis;331: Einwärtsgleis;;2.960.659
+Weiche;Innenbogenweiche (IBW);3006;S-IS-00331-E0000-W3006;Dürrlewang;04.04.2016;23.06.2018;331: Auswärtsgleis;331: Einwärtsgleis;;2.961.088
+Weiche;Außenbogenweiche (ABW);3117;S-IS-00332-B0000-W3117;Vaihingen-Bhf. (Verbindungsgleis);02.05.1987;23.06.2018;330: Auswärtsgleis;332: Verbindung Streckenast 330 mit 400 vor Vaihingen Bhf.;;248
+Weiche;Außenbogenweiche (ABW);3118;S-IS-00332-B0000-W3118;Vaihingen-Bhf. (Abzweig zum Verbindungsgleis);02.05.1987;23.06.2018;400: Einwärtsgleis;332: Verbindung Streckenast 330 mit 400 vor Vaihingen Bhf.;;524
+Kreuzungsweiche;Doppelkreuzungsweiche (DKW);3119;S-IS-00330-E0004-W3119;Kgl Vaihingen Bahnhof ;31.10.2001;23.06.2018;333: Verbindung Streckenast 330 mit 400 in der Abstellanlage;330.004: Gleis 4 in Abstellanlage Vaihingen Bhf.;;2.874
+Weiche;Einfache Weiche (EW);3120;S-IS-00330-E0004-W3120;Kgl Vaihingen Bahnhof U3;31.10.2001;23.06.2018;330: Einwärtsgleis;330.004: Gleis 4 in Abstellanlage Vaihingen Bhf.;;2.884
+Weiche;Einfache Weiche (EW);3121;S-IS-00330-A0005-W3121;Kgl Vaihingen Bahnhof ;31.10.2001;23.06.2018;330: Einwärtsgleis;330.005: Gleis 5 in Abstellanlage Vaihingen Bhf.;;2.894
+Weiche;Einfache Weiche (EW);3122;S-IS-00330-A0005-W3122;Kgl Vaihingen Bahnhof;31.10.2001;23.06.2018;330: Auswärtsgleis;330.005: Gleis 5 in Abstellanlage Vaihingen Bhf.;;2.904
+Weiche;Außenbogenweiche (ABW);3124;S-IS-00333-B0000-W3124;Abstellanlage Vaihingen Bahnhof;31.10.2001;23.06.2018;400: Einwärtsgleis;333: Verbindung Streckenast 330 mit 400 in der Abstellanlage;;254
+Weiche;Einfache Weiche (EW);3125;S-IS-00400-E0008-W3125;Kgl Vaihingen Bahnhof;01.03.1983;23.06.2018;400: Einwärtsgleis;400.008: GW Vaihingen W3128-W3125;;3.001
+Weiche;Einfache Weiche (EW);3126;S-IS-00400-A0009-W3126;Kgl Vaihingen Bahnhof;01.03.1983;23.06.2018;400: Auswärtsgleis;400.009: GW Vaihingen W3126-W3127;;3.011
+Weiche;Einfache Weiche (EW);3127;S-IS-00400-A0009-W3127;Kgl Vaihingen Bahnhof;01.03.1983;23.06.2018;400: Einwärtsgleis;400.009: GW Vaihingen W3126-W3127;;3.021
+Weiche;Einfache Weiche (EW);3128;S-IS-00400-E0008-W3128;Kgl Vaihingen Bahnhof;01.03.1983;23.06.2018;400: Auswärtsgleis;400.008: GW Vaihingen W3128-W3125;;3.031
+Weiche;Außenbogenweiche (ABW);3130;S-IS-00320-A0000-W3130;Möhringen Bhf. (einwärts);01.02.1985;23.06.2018;330: Einwärtsgleis;320: Auswärtsgleis;;2.407
+Weiche;Einfache Weiche (EW);3131;S-IS-00320-B0001-W3131;Möhringen Bhf. (Abstellgleis);01.02.1985;23.06.2018;320: Auswärtsgleis;320.001: Gleis 1 Möhringen Bhf.;;2.419
+Weiche;Einfache Weiche (EW);3133;S-IS-00320-B0002-W3133;Glw. Möhringen Bhf. (Plieninger Seite);01.02.1985;23.06.2018;320: Auswärtsgleis;320.002: Gleis 2 Möhringen Bhf.;;2.428
+Weiche;Einfache Weiche (EW);3134;S-IS-00320-B0002-W3134;Glw. Möhringen Bhf. (Plieninger Seite);01.02.1985;23.06.2018;320: Einwärtsgleis;320.002: Gleis 2 Möhringen Bhf.;;2.439
+Weiche;Einfache Weiche (EW);3144;S-IS-00330-B0003-W3144;Glw. Vaihingen Bhf. / Filderhofstraße;01.08.1987;23.06.2018;330: Einwärtsgleis;330.003: Filderhofstraße;;2.860
+Weiche;Einfache Weiche (EW);3145;S-IS-00330-B0003-W3145;Glw. Vaihingen Bhf. / Filderhofstraße;01.08.1987;23.06.2018;330: Auswärtsgleis;330.003: Filderhofstraße;;2.849
+Weiche;Einfache Weiche (EW);3166;S-IS-00320-B0003-W3166;Glw. Landhaus auswärts;01.02.1985;23.06.2018;320: Auswärtsgleis;320.003: Landhaus;;265
+Weiche;Einfache Weiche (EW);3167;S-IS-00320-B0003-W3167;Glw. Landhaus einwärts;01.02.1985;23.06.2018;320: Einwärtsgleis;320.003: Landhaus;;2.318
+Weiche;Einfache Weiche (EW);3995;S-IS-00334-E0001-W3995;Übereckverbindung Pflugmühle ;12.09.2021;23.06.2018;330: Auswärtsgleis;334: Einwärtsgleis;;3.997.132
+Weiche;Einfache Weiche (EW);3996;S-IS-00334-A0002-W3996;Übereckverbindung Pflugmühle ;12.09.2021;23.06.2018;330: Einwärtsgleis;334: Auswärtsgleis;;3.997.101
+Weiche;Einfache Weiche (EW);4001;S-IS-00330-B0001-W4001;Glw. SSB-Zentrum / Ernsthaldenweg;02.01.1982;23.06.2018;330: Auswärtsgleis;330.001: Zuf. in SSB-Zentrum Ernsthaldenstraße W4001-W4002;;2.838
+Weiche;Einfache Weiche (EW);4002;S-IS-00330-B0001-W4002;Glw. SSB-Zentrum / Ernsthaldenweg;01.10.1982;23.06.2018;330: Einwärtsgleis;330.001: Zuf. in SSB-Zentrum Ernsthaldenstraße W4001-W4002;;2.827
+Weiche;Einfache Weiche (EW);4003;S-IS-00330-B0002-W4003;SSB-Zentrum (Ein-/Ausfahrt Ernsthaldenweg);02.03.1982;23.06.2018;330: Einwärtsgleis;330.002: Zuf. in SSB-Zentrum Ernsthaldenstraße W4004-W4003;;2.817
+Weiche;Einfache Weiche (EW);4004;S-IS-00330-B0002-W4004;Ausfahrt SSB-Zentrum / Ernsthaldenweg;02.03.1982;23.06.2018;330: Auswärtsgleis;330.002: Zuf. in SSB-Zentrum Ernsthaldenstraße W4004-W4003;;2.807
+Weiche;Einfache Weiche (EW);4005;S-IS-00050-B0001-W4005;Ausfahrt SSB-Zentrum / Ernsthaldenweg;01.10.1982;23.06.2018;330: Einwärtsgleis;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;;499
+Weiche;Einfache Weiche (EW);4006;S-IS-00050-B0002-W4006;Zufahrt SSB-Zentrum / Ernsthaldenweg;02.03.1982;23.06.2018;330.002: Zuf. in SSB-Zentrum Ernsthaldenstraße W4004-W4003;050.002: Zufahrtsgleis von Vaihingen W 4006-W4007;;497
+Weiche;Einfache Weiche (EW);4007;S-IS-00050-B0002-W4007;Zu- und Ausfahrt SSB-Zentrum / Ernsthaldenweg;02.03.1982;23.06.2018;050.003: Zufahrtsgleis nördlich W4008-W4034;050.002: Zufahrtsgleis von Vaihingen W 4006-W4007;;496
+Weiche;Einfache Weiche (EW);4008;S-IS-00050-B0003-W4008;SSB Zentrum / Hauptwerkstatt Nord;02.03.1982;23.06.2018;050.002: Zufahrtsgleis von Vaihingen W 4006-W4007;050.003: Zufahrtsgleis nördlich W4008-W4034;;495
+Weiche;Innenbogenweiche (IBW);4009;S-IS-00050-B0005-W4009;SSB Zentrum / Hauptwerkstatt Nord;02.03.1985;23.06.2018;050.003: Zufahrtsgleis nördlich W4008-W4034;050.005: Gleis Westseite W4009-Prellbock;;551
+Weiche;Einfache Weiche (EW);4010;S-IS-00050-B0007-W4010;SSB Zentrum / Abstellgleis Pforte;02.03.1982;23.06.2018;050.006: Ausweichgleis bei Pforte Prellbock bis W4011;050.007: Verbindung 00006 mit 00001, W4010-W4028;;320
+Weiche;Kombiweiche (KW);4011;S-IS-00050-B0006-W4011;SSB Zentrum / Zufahrt Abst.-gleis Pforte;02.03.1985;23.06.2018;050.005: Gleis Westseite W4009-Prellbock;050.006: Ausweichgleis bei Pforte Prellbock bis W4011;;571
+Weiche;Einfache Weiche (EW);4013;S-IS-00050-B0024-W4013;SSB Zentrum / Hauptwerkstatt Nord;02.03.1985;23.06.2018;050.007: Verbindung 00006 mit 00001, W4010-W4028;050.024: Metrerspur W4013-W4014;;27.334
+Weiche;Einfache Weiche (EW);4014;S-IS-00050-B0024-W4014;SSB-Z. / Hauptwerkstatt Umfahrung / West;02.05.1982;23.06.2018;050.005: Gleis Westseite W4009-Prellbock;050.024: Metrerspur W4013-W4014;;21.336
+Weiche;Kombiweiche (KW);4015;S-IS-00050-B0008-W4015;SSB-Z. / Hauptwerkstatt Umfahrung / West;02.03.1982;23.06.2018;050.005: Gleis Westseite W4009-Prellbock;050.008: Hallenzufahrt West W4015-Prellbock;;549
+Weiche;Kombiweiche (KW);4017;S-IS-00050-B0020-W4017;Hauptwerkstatt - Hallenzufahrt Süd, Gleis 1;02.05.1982;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.020: Hallenzufahrt Süd, Gleis 1, W4017 -Halle;;322
+Weiche;Kombiweiche (KW);4018;S-IS-00050-B0010-W4018;SSB-Z. / Hauptwerkstatt Umfahrung / West;01.06.1982;23.06.2018;050.005: Gleis Westseite W4009-Prellbock;050.010: GW westl. W4019-W4018;;548
+Weiche;Kombiweiche (KW);4019;S-IS-00050-B0010-W4019;SSB-Z. / Hauptwerkstatt Umfahrung / West;01.06.1982;23.06.2018;050.009: Gleis westl. W4020-W4015;050.010: GW westl. W4019-W4018;;324
+Weiche;Kombiweiche (KW);4020;S-IS-00050-B0009-W4020;SSB-Z. / Hauptwerkstatt Umfahrung / Süd;02.03.1982;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.009: Gleis westl. W4020-W4015;;325
+Weiche;Kombiweiche (KW);4021;S-IS-00050-B0001-W4021;SSB-Z. / Hauptwerkstatt Umfahrung / Süd;02.03.1982;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;;550
+Weiche;Kombiweiche (KW);4022;S-IS-00050-B0023-W4022;Hauptwerkstatt Abstellgleis Osttor;02.03.1984;23.06.2018;050.021: Abstellgleis Ost;050.023: GW östlich, W4023-W4022;;327
+Weiche;Kombiweiche (KW);4023;S-IS-00050-B0023-W4023;SSB-Z. / Hauptwerkstatt Umfahrung / Ost;02.03.1984;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.023: GW östlich, W4023-W4022;;546
+Weiche;Kombiweiche (KW);4024;S-IS-00050-B0022-W4024;SSB-Z. / Hauptwerkstatt Umfahrung / Ost;02.03.1984;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.022: Hallenzufahrt Ost, W4025-W4024;;329
+Weiche;Kombiweiche (KW);4025;S-IS-00050-B0022-W4025;Hauptwerkstatt / Hallenzufahrt Ost;02.03.1984;23.06.2018;050.021: Abstellgleis Ost;050.022: Hallenzufahrt Ost, W4025-W4024;;330
+Weiche;Kombiweiche (KW);4028;S-IS-00050-B0007-W4028;SSB Zentrum / Hauptwerkstatt Nord;02.03.1984;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.007: Verbindung 00006 mit 00001, W4010-W4028;;331
+Weiche;Kombiweiche (KW);4029;S-IS-00050-B0004-W4029;SSB Zentrum / Hauptwerkstatt Nord;02.03.1984;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.004: Abstellgleis W4029-W4032;;332
+Weiche;Kombiweiche (KW);4031;S-IS-00050-B0026-W4031;SSB Zentrum / Hauptwerkstatt Nord;02.03.1985;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.026: Zufahrtsgeleis W4105-4031;;333
+Weiche;Kombiweiche (KW);4032;S-IS-00050-B0004-W4032;SSB Zentrum / Hauptwerkstatt Nord;02.03.1985;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.004: Abstellgleis W4029-W4032;;334
+Weiche;Einfache Weiche (EW);4033;S-IS-00050-B0027-W4033;SSB Zentrum / Hauptwerkstatt Nord;02.03.1985;23.06.2018;050.003: Zufahrtsgleis nördlich W4008-W4034;050.027: Verbindung HW-VB2, W4043-W4033;;335
+Weiche;Kombiweiche (KW);4034;S-IS-00050-B0003-W4034;SSB-Z. / Hauptwerkstatt Umfahrung / Ost;02.03.1985;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.003: Zufahrtsgleis nördlich W4008-W4034;;336
+Weiche;Kombiweiche (KW);4035;S-IS-00050-B0011-W4035;SSB-Z. / Hauptwerkstatt Umfahrung / Süd;02.03.1987;23.06.2018;050.009: Gleis westl. W4020-W4015;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;;337
+Weiche;Innenbogenweiche (IBW);4036;S-IS-00050-B0012-W4036;Hauptwerkstatt / Hallenzufahrt Gleis 11/12;01.05.2003;23.06.2018;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;050.012: Hallenzufahrt Süd, Gleis 12, W4036 -Halle;;338
+Weiche;Kombiweiche (KW);4037;S-IS-00050-B0013-W4037;Hauptwerkstatt Abstellgleis - Buswerkstatt;01.05.2003;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.013: Hallenzufahrt Süd, Gleis 10a, W4037 -Halle;;547
+Weiche;Einfache Weiche (EW);4039;S-IS-00050-B0014-W4039;Hauptwerkstatt Zufahrt Gleis 10/10a;01.06.1995;23.06.2018;050.013: Hallenzufahrt Süd, Gleis 10a, W4037 -Halle;050.014: Hallenzufahrt Süd, Gleis 10, W4039 -Halle;;340
+Weiche;Innenbogenweiche (IBW);4040;S-IS-00050-B0029-W4040;SSB-Zentrum / Zufahrt Betriebshof Möhringen;02.03.1988;23.06.2018;050.026: Zufahrtsgeleis W4105-4031;050.029: GW W4040-W4041;;341
+Weiche;Außenbogenweiche (ABW);4041;S-IS-00050-B0029-W4041;SSB-Zentrum / Verbindungsgleis Betriebshof Möhringen;02.03.1988;23.06.2018;050.027: Verbindung HW-VB2, W4043-W4033;050.029: GW W4040-W4041;;342
+Weiche;Einfache Weiche (EW);4042;S-IS-00050-B0030-W4042;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.027: Verbindung HW-VB2, W4043-W4033;050.030: Zufahrt Gleisharfe W4042-W4046;;343
+Weiche;Einfache Weiche (EW);4043;S-IS-00050-B0027-W4043;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.026: Zufahrtsgeleis W4105-4031;050.027: Verbindung HW-VB2, W4043-W4033;;344
+Weiche;Einfache Weiche (EW);4044;S-IS-00050-B0032-W4044;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.026: Zufahrtsgeleis W4105-4031;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;;545
+Weiche;Einfache Weiche (EW);4045;S-IS-00050-B0031-W4045;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.031: Zufahrt Gleisharfe W4045-W4111;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;;544
+Weiche;Außenbogenweiche (ABW);4046;S-IS-00050-B0030-W4046;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.030: Zufahrt Gleisharfe W4042-W4046;050.041: Wagenhalle Gleis 10, W4047-W4062;;538
+Weiche;Einfache Weiche (EW);4047;S-IS-00050-B0041-W4047;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.030: Zufahrt Gleisharfe W4042-W4046;050.041: Wagenhalle Gleis 10, W4047-W4062;;537
+Weiche;Innenbogenweiche (IBW);4048;S-IS-00050-B0043-W4048;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.041: Wagenhalle Gleis 10, W4047-W4062;050.043: Wagenhalle Gleis 12, W4048-W4063;;349
+Weiche;Innenbogenweiche (IBW);4049;S-IS-00050-B0042-W4049;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.041: Wagenhalle Gleis 10, W4047-W4062;050.042: Wagenhalle Gleis 11, W4049-W4064  ;;350
+Weiche;Innenbogenweiche (IBW);4050;S-IS-00050-B0045-W4050;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.043: Wagenhalle Gleis 12, W4048-W4063;050.045: Wagenhalle Gleis 14, W4050-W4060;;351
+Weiche;Innenbogenweiche (IBW);4051;S-IS-00050-B0044-W4051;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.043: Wagenhalle Gleis 12, W4048-W4063;050.044: Wagenhalle Gleis 13, W4051,W4059;;352
+Weiche;Innenbogenweiche (IBW);4052;S-IS-00050-B0046-W4052;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.045: Wagenhalle Gleis 14, W4050-W4060;050.046: Wagenhalle Gleis 15, W4052-W4058;;353
+Weiche;Einfache Weiche (EW);4053;S-IS-00050-B0047-W4053;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.047: Wagenhalle Gleis 16, W4053-W4061;;354
+Weiche;Einfache Weiche (EW);4054;S-IS-00050-B0048-W4054;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.047: Wagenhalle Gleis 16, W4053-W4061;050.048: Wagenhalle Gleis 17, W4054-W4057;;355
+Weiche;Einfache Weiche (EW);4055;S-IS-00050-B0049-W4055;BP2 - Betriebshof Möhringen / Nord;02.03.1988;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.049: Wagenhalle Gleis 18, W4055-W4056;;356
+Weiche;Einfache Weiche (EW);4056;S-IS-00050-B0049-W4056;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.049: Wagenhalle Gleis 18, W4055-W4056;;357
+Weiche;Einfache Weiche (EW);4057;S-IS-00050-B0048-W4057;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.047: Wagenhalle Gleis 16, W4053-W4061;050.048: Wagenhalle Gleis 17, W4054-W4057;;358
+Weiche;Innenbogenweiche (IBW);4058;S-IS-00050-B0046-W4058;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.045: Wagenhalle Gleis 14, W4050-W4060;050.046: Wagenhalle Gleis 15, W4052-W4058;;359
+Weiche;Innenbogenweiche (IBW);4059;S-IS-00050-B0044-W4059;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.043: Wagenhalle Gleis 12, W4048-W4063;050.044: Wagenhalle Gleis 13, W4051,W4059;;360
+Weiche;Innenbogenweiche (IBW);4060;S-IS-00050-B0045-W4060;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.043: Wagenhalle Gleis 12, W4048-W4063;050.045: Wagenhalle Gleis 14, W4050-W4060;;361
+Weiche;Innenbogenweiche (IBW);4061;S-IS-00050-B0047-W4061;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.047: Wagenhalle Gleis 16, W4053-W4061;;362
+Weiche;Innenbogenweiche (IBW);4062;S-IS-00050-B0041-W4062;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.041: Wagenhalle Gleis 10, W4047-W4062;;363
+Weiche;Innenbogenweiche (IBW);4063;S-IS-00050-B0043-W4063;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.041: Wagenhalle Gleis 10, W4047-W4062;050.043: Wagenhalle Gleis 12, W4048-W4063;;536
+Weiche;Innenbogenweiche (IBW);4064;S-IS-00050-B0042-W4064;BP2 - Betriebshof Möhringen / Süd;02.03.1994;23.06.2018;050.041: Wagenhalle Gleis 10, W4047-W4062;050.042: Wagenhalle Gleis 11, W4049-W4064  ;;535
+Weiche;Innenbogenweiche (IBW);4065;S-IS-00050-B0033-W4065;BP2 - Betriebshof Möhringen / Südumfahrung;01.03.1994;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.033: Innere Umfahrung, W4065-W4081;;366
+Weiche;Innenbogenweiche (IBW);4066;S-IS-00050-B0034-W4066;BP2 - Betriebshof Möhringen / Südumfahrung;01.03.1994;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.034: Mittleres Gleis Südliche Schleife W4066-W4068;;367
+Weiche;Einfache Weiche (EW);4067;S-IS-00050-B0035-W4067;BP2 - Betriebshof Möhringen / Südumfahrung;01.04.1995;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.035: GW W4067-W4069;;368
+Weiche;Einfache Weiche (EW);4068;S-IS-00050-B0034-W4068;BP2 - Betriebshof Möhringen / Südumfahrung;01.04.1995;23.06.2018;050.035: GW W4067-W4069;050.034: Mittleres Gleis Südliche Schleife W4066-W4068;;540
+Weiche;Einfache Weiche (EW);4069;S-IS-00050-B0035-W4069;BP2 - Betriebshof Möhringen / Südumfahrung;01.04.1995;23.06.2018;050.033: Innere Umfahrung, W4065-W4081;050.035: GW W4067-W4069;;370
+Weiche;Einfache Weiche (EW);4070;S-IS-00050-B0036-W4070;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1994;23.06.2018;050.033: Innere Umfahrung, W4065-W4081;050.036: Verbindungsgleis W4070-W4083;;541
+Weiche;Einfache Weiche (EW);4071;S-IS-00050-B0037-W4071;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1994;23.06.2018;050.036: Verbindungsgleis W4070-W4083;050.037: Wasch- und Wartungshalle Gleis 4, W4110-W4071;;372
+Weiche;Außenbogenweiche (ABW);4072;S-IS-00050-B0040-W4072;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1994;23.06.2018;050.037: Wasch- und Wartungshalle Gleis 4, W4110-W4071;050.040: Wasch- und Wartungshalle Gleis 7, W4072-W4075;;373
+Weiche;Innenbogenweiche (IBW);4073;S-IS-00050-B0038-W4073;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1994;23.06.2018;050.040: Wasch- und Wartungshalle Gleis 7, W4072-W4075;050.038: Wasch- und Wartungshalle Gleis 5, W4073-W4076;;374
+Weiche;Innenbogenweiche (IBW);4074;S-IS-00050-B0039-W4074;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1994;23.06.2018;050.040: Wasch- und Wartungshalle Gleis 7, W4072-W4075;050.039: Wasch- und Wartungshalle Gleis 6, W4074-W4077;;375
+Weiche;Einfache Weiche (EW);4075;S-IS-00050-B0040-W4075;BP2 - Betriebshof Möhringen / Nordzufahrt Werkstatt;01.03.1988;23.06.2018;050.033: Innere Umfahrung, W4065-W4081;050.040: Wasch- und Wartungshalle Gleis 7, W4072-W4075;;376
+Weiche;Einfache Weiche (EW);4076;S-IS-00050-B0038-W4076;BP2 - Betriebshof Möhringen / Nordzufahrt Werkstatt;01.03.1988;23.06.2018;050.039: Wasch- und Wartungshalle Gleis 6, W4074-W4077;050.038: Wasch- und Wartungshalle Gleis 5, W4073-W4076;;377
+Weiche;Einfache Weiche (EW);4077;S-IS-00050-B0039-W4077;BP2 - Betriebshof Möhringen / Nordzufahrt Werkstatt;01.03.1988;23.06.2018;050.033: Innere Umfahrung, W4065-W4081;050.039: Wasch- und Wartungshalle Gleis 6, W4074-W4077;;539
+Weiche;Einfache Weiche (EW);4078;S-IS-00050-B0032-W4078;BP2 - Betriebshof Möhringen / Nordzufahrt Werkstatt;01.04.1993;23.06.2018;050.037: Wasch- und Wartungshalle Gleis 4, W4110-W4071;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;;379
+Weiche;Einfache Weiche (EW);4081;S-IS-00050-B0033-W4081;BP2 - Betriebshof Möhringen / Nordzufahrt Werkstatt;01.03.1988;23.06.2018;050.031: Zufahrt Gleisharfe W4045-W4111;050.033: Innere Umfahrung, W4065-W4081;;543
+Weiche;Einfache Weiche (EW);4083;S-IS-00050-B0036-W4083;BP2 - Betriebshof Möhringen / Südzufahrt Werkstatt;01.04.1995;23.06.2018;050.032: Äußere Umfahrung (Wagenhalle Gleis 19), W4044-W4078;050.036: Verbindungsgleis W4070-W4083;;21.453
+Weiche;Kombiweiche (KW);4084;S-IS-00050-B0016-W4084;Hauptwerkstatt vor Abstellgleis - Buswerkstatt;20.05.2003;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.016: Hallenzufahrt Süd, Gleis 8, W4084 -Halle;;20.281
+Weiche;Einfache Weiche (EW);4085;S-IS-00050-B0018-W4085;Hauptwerkstatt Hallenzufahrt Gleis 6 - 8;01.05.2003;23.06.2018;050.016: Hallenzufahrt Süd, Gleis 8, W4084 -Halle;050.018: Hallenzufahrt Süd, Gleis 6, W4085 -Halle;;21.463
+Weiche;Einfache Weiche (EW);4086;S-IS-00050-B0017-W4086;Hauptwerkstatt Hallenzufahrt Gleis 7/8;11.06.2003;23.06.2018;050.016: Hallenzufahrt Süd, Gleis 8, W4084 -Halle;050.017: Hallenzufahrt Süd, Gleis 7, W4086 -Halle;;21.471
+Weiche;Innenbogenweiche (IBW);4087;S-IS-00050-B0019-W4087;Hauptwerkstatt Hallenzufahrt Gleis 5/6;11.06.2003;23.06.2018;050.018: Hallenzufahrt Süd, Gleis 6, W4085 -Halle;050.019: Hallenzufahrt Süd, Gleis 5, W4087 -Halle;;21.481
+Weiche;Einfache Weiche (EW);4090;S-IS-00050-B0015-W4090;Hauptwerkstatt Hallenzufahrt Gleis 9/10;01.11.2002;23.06.2018;050.014: Hallenzufahrt Süd, Gleis 10, W4039 -Halle;050.015: Hallenzufahrt Süd, Gleis 9, W4090 -Halle;;20.280
+Weiche;Einfache Weiche (EW);4094;S-IS-00050-B0073-W4094;BP2 Gleisharfe;01.10.2017;23.06.2018;050.033: Innere Umfahrung, W4065-W4081;050.073: Abstellgleis 81;;3.371.734
+Weiche;Einfache Weiche (EW);4095;S-IS-00050-B0077-W4095;BP2 - Betriebshof Möhringen / Süd;24.11.2017;23.06.2018;050.073: Abstellgleis 81;050.077: Abstellgleis 85;;3.371.883
+Weiche;Innenbogenweiche (IBW);4096;S-IS-00050-B0078-W4096;BP2 - Betriebshof Möhringen / Süd;06.12.2017;23.06.2018;050.077: Abstellgleis 85;050.078: Abstellgleis 86;;3.372.665
+Weiche;Einfache Weiche (EW);4097;S-IS-00050-B0075-W4097;BP2 - Betriebshof Möhringen / Süd;06.12.2017;23.06.2018;050.073: Abstellgleis 81;050.075: Abstellgleis 83;;3.372.799
+Weiche;Innenbogenweiche (IBW);4098;S-IS-00050-B0079-W4098;BP2 - Betriebshof Möhringen / Süd;06.12.2017;23.06.2018;050.078: Abstellgleis 86;050.079: Abstellgleis 87;;3.373.426
+Weiche;Innenbogenweiche (IBW);4099;S-IS-00050-B0076-W4099;BP2 - Betriebshof Möhringen / Süd;06.12.2017;23.06.2018;050.075: Abstellgleis 83;050.076: Abstellgleis 84;;3.373.446
+Weiche;Einfache Weiche (EW);4100;S-IS-00050-B0074-W4100;BP2 - Betriebshof Möhringen / Süd;06.12.2017;23.06.2018;050.073: Abstellgleis 81;050.074: Abstellgleis 82;;3.372.898
+Weiche;Außenbogenweiche (ABW);4101;S-IS-00334-A0002-W4101;Pflugmühle ;12.09.2021;23.06.2018;340: Auswärtsgleis;334: Auswärtsgleis;;3.997.016
+Weiche;Außenbogenweiche (ABW);4102;S-IS-00340-B0001-W4102;Pflugmühle ;01.06.1987;23.06.2018;340: Einwärtsgleis;334: Einwärtsgleis;;381
+Weiche;Außenbogenweiche (ABW);4103;S-IS-00340-B0001-W4103;Sindelbach / Zufahrt SSB-Z. - Ost;01.06.1987;23.06.2018;340: Auswärtsgleis;050.028: Zufahrtsgleis W4104-W4109;;2.970
+Weiche;Außenbogenweiche (ABW);4104;S-IS-00050-B0028-W4104;Zufahrt SSB-Zentrum Sindelbach;01.06.1987;23.06.2018;340: Einwärtsgleis;050.080: Zufahrtsgleis Pflugmühle;;503
+Weiche;Einfache Weiche (EW);4105;S-IS-00050-B0026-W4105;Zufahrt SSB-Zentrum - Süd-Ost / Sindelbach;01.05.1987;23.06.2018;340: Auswärtsgleis;050.026: Zufahrtsgeleis W4105-4031;;384
+Weiche;Einfache Weiche (EW);4106;S-IS-00340-B0002-W4106;Glw. Rohrer Weg / auswärts;01.05.1987;23.06.2018;340: Auswärtsgleis;340.002: Rohrer Weg, W4107-W4106;;2.979
+Weiche;Einfache Weiche (EW);4107;S-IS-00340-B0002-W4107;Glw. Rohrer Weg / einwärts;01.05.1987;23.06.2018;340: Einwärtsgleis;340.002: Rohrer Weg, W4107-W4106;;2.990
+Weiche;Innenbogenweiche (IBW);4108;S-IS-00050-B0028-W4108;Sindelbach / Zufahrt SSB-Z. - Ost;12.09.2021;23.06.2018;050.080: Zufahrtsgleis Pflugmühle;050.028: Zufahrtsgleis W4104-W4109;;3.997.163
+Weiche;Einfache Weiche (EW);4109;S-IS-00050-B0028-W4109;SSB-Zentrum / Zufahrt Ost;01.03.1988;23.06.2018;050.026: Zufahrtsgeleis W4105-4031;050.028: Zufahrtsgleis W4104-W4109;;387
+Weiche;Einfache Weiche (EW);4110;S-IS-00050-B0037-W4110;SSB-Zentrum / Zufahrt Ost;01.03.1988;23.06.2018;050.026: Zufahrtsgeleis W4105-4031;050.037: Wasch- und Wartungshalle Gleis 4, W4110-W4071;;388
+Weiche;Außenbogenweiche (ABW);4111;S-IS-00050-B0031-W4111;BP2 - Betriebshof Möhringen / Ausfahrt Nord;01.03.1988;23.06.2018;050.037: Wasch- und Wartungshalle Gleis 4, W4110-W4071;050.031: Zufahrt Gleisharfe W4045-W4111;;542
+Weiche;Einfache Weiche (EW);4112;S-IS-00340-B0007-W4112;GLW bei Einfahrtsgleis;12.09.2021;23.06.2018;340: Einwärtsgleis;340.007: GW bei Einfahrtsgleis;;3.997.214
+Weiche;Einfache Weiche (EW);4113;S-IS-00340-B0007-W4113;GLW bei Einfahrtsgleis;12.09.2021;23.06.2018;340: Auswärtsgleis;340.007: GW bei Einfahrtsgleis;;3.997.259
+Weiche;Einfache Weiche (EW);4203;S-IS-00330-B0006-W4203;Glw. Ernsthaldenstraße / Einwärts;02.06.2013;23.06.2018;330: Einwärtsgleis;330.001: Zuf. in SSB-Zentrum Ernsthaldenstraße W4001-W4002;;2.204.643
+Weiche;Innenbogenweiche (IBW);4204;S-IS-00330-B0006-W4204;Glw. Ernsthaldenstraße / Auswärts;02.06.2013;23.06.2018;330: Auswärtsgleis;330.001: Zuf. in SSB-Zentrum Ernsthaldenstraße W4001-W4002;;2.204.908
+Kreuzung;Kreuzung (Kr);8130;S-IS-00340-A0000-K8130;Dpl-Gl_Abzw_VAIHINGER_STRAßE;;23.06.2018;330: Einwärtsgleis;340: Auswärtsgleis;;29.776
+Kreuzung;Bogenkreuzung (BKr);8132;S-IS-00334-E0001-K8132;Dpl-Gl_Abzw_ÜBERECKVERBINDUNG_PFLUGMÜHLE;12.09.2021;23.06.2018;334: Einwärtsgleis;330: Einwärtsgleis;;4.017.097
+Kreuzung;Bogenkreuzung (BKr);8133;S-IS-00334-E0001-K8133;Dpl-Gl_SINDELBACH;12.09.2021;23.06.2018;340: Auswärtsgleis;334: Einwärtsgleis;;4.017.511
+Kreuzung;Bogenkreuzung (BKr);8134;S-IS-00050-A0080-K8134;Dpl-Gl_SINDELBACH;12.09.2021;23.06.2018;340: Auswärtsgleis;050.080: Zufahrtsgleis Pflugmühle;;4.030.305
+Kreuzung;Kreuzung (Kr);8495;S-IS-00330-E0004-K8495;Kgl_U3_VAIHINGEN;31.10.2001;23.06.2018;330.005: Gleis 5 in Abstellanlage Vaihingen Bhf.;330.004: Gleis 4 in Abstellanlage Vaihingen Bhf.;;29.775
+Kreuzung;Kreuzung (Kr);8500;S-IS-00400-E0008-K8500;Kgl_U1_!VAIHINGEN;;23.06.2018;400.009: GW Vaihingen W3126-W3127;400.008: GW Vaihingen W3128-W3125;;29.787
+Kreuzung;Kreuzung (Kr);8505;S-IS-00320-E0000-K8505;Dpl-Gl_Abzw_U3/U6_BHF-MÖHRINGEN;21.05.1984;23.06.2018;300: Einwärtsgleis;320: Einwärtsgleis;;29.789
+Kreuzung;Kreuzung (Kr);8600;S-IS-00050-B0005-K8600;Kreuzung_Pforte_SSB-Zentrum_HW;01.04.1985;23.06.2018;050.007: Verbindung 00006 mit 00001, W4010-W4028;050.005: Gleis Westseite W4009-Prellbock;;29.722
+Kreuzung;Kreuzung (Kr);8601;S-IS-00050-A0002-K8601;Kreuzung_Ausfahrt_SSB-ZENTRUM_Ernsthaldenstr.;02.06.2013;23.06.2018;330: Einwärtsgleis;050.002: Zufahrtsgleis von Vaihingen W 4006-W4007;;2.385.368
+Kreuzung;Bogenkreuzung (BKr);8602;S-IS-00331-B0000-K8602;Abzweig Wallgraben / Dürrelwang;08.08.2014;23.06.2018;330: Einwärtsgleis;331: Auswärtsgleis;;2.726.144
+Kreuzung;Kreuzung (Kr);8605;S-IS-00050-B0024-K8605;M-R-Spur_SSB-ZENTRUM_(NORD-WEST);01.04.1985;23.06.2018;050.003: Zufahrtsgleis nördlich W4008-W4034;050.024: Metrerspur W4013-W4014;;29.730
+Kreuzung;Kreuzung (Kr);8610;S-IS-00050-B0007-K8610;R-Spur_SSB-ZENTRUM_(NORD-WEST);01.04.1985;23.06.2018;050.003: Zufahrtsgleis nördlich W4008-W4034;050.007: Verbindung 00006 mit 00001, W4010-W4028;;29.723
+Kreuzung;Kreuzung (Kr);8613;S-IS-00050-B0008-K8613;R-Spur_SSB-ZENTRUM_(SÜD);01.06.2008;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.008: Hallenzufahrt West W4015-Prellbock;;1.052.815
+Kreuzung;Kreuzung (Kr);8614;S-IS-00050-B0008-K8614;R-Spur_SSB-ZENTRUM_(SÜD);01.06.2008;23.06.2018;050.008: Hallenzufahrt West W4015-Prellbock;050.008: Hallenzufahrt West W4015-Prellbock;;1.052.821
+Kreuzung;Kreuzung (Kr);8615;S-IS-00050-B0023-K8615;R-Spur_SSB-ZENTRUM_(OST);01.07.1984;23.06.2018;050.022: Hallenzufahrt Ost, W4025-W4024;050.023: GW östlich, W4023-W4022;;29.729
+Kreuzung;Kreuzung (Kr);8620;S-IS-00050-B0027-K8620;Kreuzung_R-Spur_SSB-ZENTRUM_(NORD-OST);01.04.1985;23.06.2018;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;050.027: Verbindung HW-VB2, W4043-W4033;;29.719
+Kreuzung;Kreuzung (Kr);8625;S-IS-00050-B0008-K8625;R-Spur_SSB-ZENTRUM_(SÜD);01.04.1987;23.06.2018;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;050.008: Hallenzufahrt West W4015-Prellbock;;29.724
+Kreuzung;Kreuzung (Kr);8626;S-IS-00050-B0018-K8626;R-Spur_SSB-ZENTRUM_(SÜD);15.08.2003;23.06.2018;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;050.018: Hallenzufahrt Süd, Gleis 6, W4085 -Halle;;29.794
+Kreuzung;Kreuzung (Kr);8627;S-IS-00050-B0016-K8627;R-Spur_SSB-ZENTRUM_(SÜD);15.08.2003;23.06.2018;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;050.016: Hallenzufahrt Süd, Gleis 8, W4084 -Halle;;29.793
+Kreuzung;Kreuzung (Kr);8646;S-IS-00050-B0001-K8646;R-Spur_SSB-ZENTRUM_(SÜD);01.06.1995;23.06.2018;050.013: Hallenzufahrt Süd, Gleis 10a, W4037 -Halle;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;;29.720
+Kreuzung;Kreuzung (Kr);8647;S-IS-00050-B0001-K8647;R-Spur_SSB-ZENTRUM_(SÜD);20.05.2003;23.06.2018;050.016: Hallenzufahrt Süd, Gleis 8, W4084 -Halle;050.001: Zufahrtsgleis von Möhringen + Umfahrung W 4005-W402;;29.721
+Kreuzung;Kreuzung (Kr);8650;S-IS-00050-B0012-K8650;R-Spur_SSB-ZENTRUM_(SÜD);01.07.1995;23.06.2018;050.014: Hallenzufahrt Süd, Gleis 10, W4039 -Halle;050.012: Hallenzufahrt Süd, Gleis 12, W4036 -Halle;;29.726
+Kreuzung;Kreuzung (Kr);8651;S-IS-00050-B0014-K8651;R-Spur_SSB-ZENTRUM_(SÜD);01.07.1995;23.06.2018;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;050.014: Hallenzufahrt Süd, Gleis 10, W4039 -Halle;;29.728
+Kreuzung;Kreuzung (Kr);8652;S-IS-00050-B0013-K8652;R-Spur_SSB-ZENTRUM_(SÜD);01.07.1995;23.06.2018;050.012: Hallenzufahrt Süd, Gleis 12, W4036 -Halle;050.013: Hallenzufahrt Süd, Gleis 10a, W4037 -Halle;;29.727
+Kreuzung;Kreuzung (Kr);8653;S-IS-00050-B0011-K8653;R-Spur_SSB-ZENTRUM_(SÜD);01.07.1995;23.06.2018;050.013: Hallenzufahrt Süd, Gleis 10a, W4037 -Halle;050.011: Hallenzufahrt Süd, Gleis 11, W4035 -Halle;;29.725

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weichen-Checkliste", "Weichen-Checkliste\Weichen-Checkliste.csproj", "{AF5641D4-F687-41F0-926F-A1C1C84E5A85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8A7A8FB-2028-4914-907D-6C258D07BCDE}
+	EndGlobalSection
+EndGlobal
