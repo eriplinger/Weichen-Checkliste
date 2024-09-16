@@ -35,6 +35,16 @@
             <RowDefinition Height="30" /> <!--Arbeitsvorrat3-->
             <RowDefinition Height="30" /> <!--Arbeitsvorrat4-->
             <RowDefinition Height="30" /> <!--Arbeitsvorrat5-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat1-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat2-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat3-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat4-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat5-->
             <RowDefinition Height="30" /> <!--Reserve-->
 
         </Grid.RowDefinitions>
@@ -66,7 +76,7 @@
 
         <!-- SAP-Nr. -->
         <Label Content="SAP-Nr.:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
+        <TextBox Name="SAP-Nr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
         
         <!-- Art -->
         <Label Content="Art:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
@@ -117,9 +127,13 @@
                   SelectionMode="Single"
                   SelectionChanged="dataGrid_SelectionChanged"
                   HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch" 
-                  Grid.RowSpan="5" Grid.ColumnSpan="3"/>
-            
+                  VerticalAlignment="Stretch"
+                  Grid.RowSpan="20" Grid.ColumnSpan="3"/>
+
+        <!--Grid.RowSpan="5" Grid.ColumnSpan="3"
+        HorizontalAlignment="Stretch" 
+        VerticalAlignment="Stretch"-->
+        
         <!--<Button Content="Zeile markieren" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Click="MarkRow_Click" />-->
         <!-- Laden -->
         <Button Content="Laden" Grid.Row="8" Grid.Column="3" Click="Laden_Click"/>

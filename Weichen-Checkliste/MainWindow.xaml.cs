@@ -1,6 +1,8 @@
 ﻿
 
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Irony;
 using Microsoft.Win32;
 using System.Data;
 using System.IO;
@@ -15,6 +17,20 @@ namespace Weichen_Checkliste
     public partial class MainWindow : Window
     {
         private DataTable dataTable;
+        private string AktuellesDatum;
+        private string Bearbeiter;
+        private string Anlagennr;
+        private string SAPNr;
+        private string Art;
+        private string Typ;
+        private string Einbauort;
+        private string EinbauUrWeiche;
+        private string Erneuerung;
+        private string Stammgleis;
+        private string Zweiggleis;
+        private string LetzteInstandhaltung;
+        private string Status;
+        private string Kommentare;
 
         public MainWindow()
         {
@@ -129,8 +145,22 @@ namespace Weichen_Checkliste
             if (Arbeitsvorrat.SelectedItem != null)
             {
                 DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
+
                 string rowData = string.Join(", ", selectedRow.Row.ItemArray);
                 MessageBox.Show($"Ausgewählte Daten: {rowData}");
+
+                string Anlagennr = selectedRow["Anlagennummer"].ToString();
+
+SAP - Nr
+Art
+Typ
+Einbauort
+EinbauUrWeiche
+Erneuerung
+Stammgleis
+Zweiggleis
+LetzteInstandhaltung
+Status
             }
         }
 
