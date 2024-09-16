@@ -76,7 +76,7 @@
 
         <!-- SAP-Nr. -->
         <Label Content="SAP-Nr.:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="SAP-Nr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
+        <TextBox Name="SAPNr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
         
         <!-- Art -->
         <Label Content="Art:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />

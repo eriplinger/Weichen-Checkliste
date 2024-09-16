@@ -17,20 +17,20 @@ namespace Weichen_Checkliste
     public partial class MainWindow : Window
     {
         private DataTable dataTable;
-        private string AktuellesDatum;
+        //private string AktuellesDatum;
         private string Bearbeiter;
-        private string Anlagennr;
-        private string SAPNr;
-        private string Art;
-        private string Typ;
-        private string Einbauort;
-        private string EinbauUrWeiche;
-        private string Erneuerung;
-        private string Stammgleis;
-        private string Zweiggleis;
-        private string LetzteInstandhaltung;
-        private string Status;
-        private string Kommentare;
+        //private string Anlagennr;
+        //private string SAPNr;
+        //private string Art;
+        //private string Typ;
+        //private string Einbauort;
+        //private string EinbauUrWeiche;
+        //private string Erneuerung;
+        //private string Stammgleis;
+        //private string Zweiggleis;
+        //private string LetzteInstandhaltung;
+        //private string Status;
+        //private string Kommentare;
 
         public MainWindow()
         {
@@ -149,18 +149,30 @@ namespace Weichen_Checkliste
                 string rowData = string.Join(", ", selectedRow.Row.ItemArray);
                 MessageBox.Show($"Ausgewählte Daten: {rowData}");
 
-                string Anlagennr = selectedRow["Anlagennummer"].ToString();
+                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
+                Art.Text = selectedRow["Art"].ToString();
+                Typ.Text = selectedRow["Typ"].ToString();
+                Einbauort.Text = selectedRow["Einbauort"].ToString();
+                EinbauUrWeiche.Text = selectedRow["Einbau Ur-Weiche"].ToString();
+                Erneuerung.Text = selectedRow["Erneuerung"].ToString();
+                Stammgleis.Text = selectedRow["Stammgleis"].ToString();
+                Zweiggleis.Text = selectedRow["Zweiggleis"].ToString();
+                LetzteInstandhaltung.Text = selectedRow["LETZTE_INSTANDHALTUNG"].ToString();
+                Status.Text = selectedRow["GW201_ID1"].ToString();
+                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
+                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
+                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
 
-SAP - Nr
-Art
-Typ
-Einbauort
-EinbauUrWeiche
-Erneuerung
-Stammgleis
-Zweiggleis
-LetzteInstandhaltung
-Status
+                //SAP - Nr
+                //Art
+                //Typ
+                //Einbauort
+                //EinbauUrWeiche
+                //Erneuerung
+                //Stammgleis
+                //Zweiggleis
+                //LetzteInstandhaltung
+                //Status
             }
         }
 
