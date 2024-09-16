@@ -69,6 +69,10 @@
         <!-- Datum -->
         <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
         <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
+      
+        <!-- Bearbeiter -->
+        <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Anlagennr -->
         <Label Content="Anlagennr:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
@@ -111,8 +115,8 @@
         <TextBox Name="LetzteInstandhaltung" Grid.Row="6" Grid.Column="0" Margin="120,0,0,0" />
 
         <!-- GW201_ID1 -->
-        <Label Content="Status:" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Status" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
+        <Label Content="GW201_ID1:" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="GW201_ID1" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Kommentare -->
         <Label Content="Kommentare:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" />

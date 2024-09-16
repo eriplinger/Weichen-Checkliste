@@ -8,6 +8,7 @@ using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace Weichen_Checkliste
 {
@@ -18,7 +19,7 @@ namespace Weichen_Checkliste
     {
         private DataTable dataTable;
         //private string AktuellesDatum;
-        private string Bearbeiter;
+        //private string Bearbeiter;
         //private string Anlagennr;
         //private string SAPNr;
         //private string Art;
@@ -35,6 +36,7 @@ namespace Weichen_Checkliste
         public MainWindow()
         {
             InitializeComponent();
+            dataTable = new DataTable();
         }
 
 
@@ -146,10 +148,14 @@ namespace Weichen_Checkliste
             {
                 DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
 
-                string rowData = string.Join(", ", selectedRow.Row.ItemArray);
-                MessageBox.Show($"Ausgewählte Daten: {rowData}");
+                //string rowData = string.Join(", ", selectedRow.Row.ItemArray);
+                //MessageBox.Show($"Ausgewählte Daten: {rowData}");
 
+
+                AktuellesDatum.Text = DateTime.Now.ToString();
+                Bearbeiter.Text = "Max Mustermann";
                 Anlagennr.Text = selectedRow["Anlagennr"].ToString();
+                SAPNr.Text = selectedRow["SAP-Nr."].ToString();
                 Art.Text = selectedRow["Art"].ToString();
                 Typ.Text = selectedRow["Typ"].ToString();
                 Einbauort.Text = selectedRow["Einbauort"].ToString();
@@ -158,28 +164,49 @@ namespace Weichen_Checkliste
                 Stammgleis.Text = selectedRow["Stammgleis"].ToString();
                 Zweiggleis.Text = selectedRow["Zweiggleis"].ToString();
                 LetzteInstandhaltung.Text = selectedRow["LETZTE_INSTANDHALTUNG"].ToString();
-                Status.Text = selectedRow["GW201_ID1"].ToString();
-                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
-                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
-                Anlagennr.Text = selectedRow["Anlagennr"].ToString();
-
-                //SAP - Nr
-                //Art
-                //Typ
-                //Einbauort
-                //EinbauUrWeiche
-                //Erneuerung
-                //Stammgleis
-                //Zweiggleis
-                //LetzteInstandhaltung
-                //Status
-            }
+                GW201_ID1.Text = selectedRow["GW201_ID1"].ToString();
+                Kommentare.Text = "ohne Befund";           }
         }
 
         // Event-Handler für den "Speichern"-Button
         private void Speichern_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("noch nicht implementiert");
+            string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+            SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, "grün", Kommentare.Text);
+        }
+
+        // Funktion zum Speichern in Excel
+        private void SaveToExcel(string Weichennummer, string Datum, string Bearbeiter, string Status, string Kommentare)
+        {
+            try
+            {
+                // Neues Excel-Workbook und Worksheet erstellen
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add(Weichennummer + "_" + Datum);
+
+                    // Daten in die Zellen schreiben
+                    worksheet.Cell(1, 1).Value = "Datum";
+                    worksheet.Cell(1, 2).Value = "Bearbeiter";
+                    worksheet.Cell(1, 3).Value = "Status";
+                    worksheet.Cell(1, 4).Value = "Kommentare";
+
+                    worksheet.Cell(2, 1).Value = Datum;
+                    worksheet.Cell(2, 2).Value = Bearbeiter;
+                    worksheet.Cell(2, 3).Value = Status;
+                    worksheet.Cell(2, 4).Value = Kommentare;
+
+                    // Excel-Datei speichern
+                    string filePath = Weichennummer + "_" + Datum + ".xlsx";
+                    workbook.SaveAs(filePath);
+                }
+
+                MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Speichern der Excel-Datei: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
