@@ -20,7 +20,7 @@ namespace Weichen_Checkliste
     {
         private DataTable dataTable;
         //private string AktuellesDatum;
-        //private string Bearbeiter;
+        //private string ausgewählterBearbeiter;
         //private string Anlagennr;
         //private string SAPNr;
         //private string Art;
@@ -178,7 +178,6 @@ namespace Weichen_Checkliste
 
                 
                 AktuellesDatum.Text = DateTime.Now.ToString();
-                Bearbeiter.Text = "Max Mustermann";
                 Anlagennr.Text = selectedRow["Anlagennr"].ToString();
                 SAPNr.Text = selectedRow["SAP-Nr."].ToString();
                 Art.Text = selectedRow["Art"].ToString();

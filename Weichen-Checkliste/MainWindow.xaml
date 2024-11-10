@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Weichen_Checkliste"
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
-    <Grid Margin="10">
+  <Grid Margin="10">
        
         <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
         <Grid.ColumnDefinitions>
@@ -70,9 +70,17 @@
         <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
         <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
       
-        <!-- Bearbeiter -->
+        <!-- Bearbeiter --><!--
         <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />
+        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />-->
+
+      <!-- Bearbeiter -->
+      <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+      <ComboBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" SelectedIndex="0">
+        <ComboBoxItem Content="Frühschicht" />
+        <ComboBoxItem Content="Spätschicht" />
+        <ComboBoxItem Content="Nachtschicht" />
+      </ComboBox>
 
         <!-- Anlagennr -->
         <Label Content="Anlagennr:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
