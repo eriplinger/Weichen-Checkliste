@@ -13,13 +13,14 @@ using System.Text;
 
 namespace Weichen_Checkliste
 {
-    string aktuellerBearbeiter = "Max Mustermann";
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        //string aktuellerBearbeiter = "Nachtdienst";
+
         private DataTable dataTable;
         //private string AktuellesDatum;
         //private string Bearbeiter;
@@ -46,7 +47,7 @@ namespace Weichen_Checkliste
         // Event-Handler für den "Laden"-Button
         private void Laden_Click(object sender, RoutedEventArgs e)
         {
-            DataTable dt = null;
+            DataTable dt = new DataTable();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
@@ -199,12 +200,13 @@ namespace Weichen_Checkliste
                 {
                     LetzteInstandhaltung.Text = "";
                     GW201_ID1.Text = "";
+                    
                 }
                 Kommentare.Text = "ohne Befund";
 
                 if (Bearbeiter.Equals(""))
                 {
-                    
+                    MessageBox.Show($"Ein Bearbeiter muss eingetragen werden");
                 }
             }
         }
