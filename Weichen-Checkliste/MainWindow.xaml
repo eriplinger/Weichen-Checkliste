@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Weichen_Checkliste"
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
-    <Grid Margin="10">
+  <Grid Margin="10">
        
         <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
         <Grid.ColumnDefinitions>

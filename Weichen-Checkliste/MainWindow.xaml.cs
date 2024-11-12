@@ -23,7 +23,7 @@ namespace Weichen_Checkliste
 
         private DataTable dataTable;
         //private string AktuellesDatum;
-        //private string Bearbeiter;
+        //private string ausgewählterBearbeiter;
         //private string Anlagennr;
         //private string SAPNr;
         //private string Art;
