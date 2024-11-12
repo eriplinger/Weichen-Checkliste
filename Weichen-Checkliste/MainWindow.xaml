@@ -70,9 +70,16 @@
         <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
         <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
       
-        <!-- Bearbeiter -->
+        <!-- Bearbeiter --><!--
         <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />
+        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />-->
+      <!-- Bearbeiter -->
+      <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+      <ComboBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0">
+        <ComboBoxItem Content="Frühdienst" />
+        <ComboBoxItem Content="Spätdienst" />
+        <ComboBoxItem Content="Nachtdienst" />
+      </ComboBox>
 
         <!-- Anlagennr -->
         <Label Content="Anlagennr:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />

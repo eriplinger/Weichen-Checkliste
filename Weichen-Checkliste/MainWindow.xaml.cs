@@ -13,6 +13,8 @@ using System.Text;
 
 namespace Weichen_Checkliste
 {
+    string aktuellerBearbeiter = "Max Mustermann";
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -178,7 +180,7 @@ namespace Weichen_Checkliste
 
                 
                 AktuellesDatum.Text = DateTime.Now.ToString();
-                Bearbeiter.Text = "Max Mustermann";
+                //Bearbeiter.Text = aktuellerBearbeiter;
                 Anlagennr.Text = selectedRow["Anlagennr"].ToString();
                 SAPNr.Text = selectedRow["SAP-Nr."].ToString();
                 Art.Text = selectedRow["Art"].ToString();
@@ -199,6 +201,11 @@ namespace Weichen_Checkliste
                     GW201_ID1.Text = "";
                 }
                 Kommentare.Text = "ohne Befund";
+
+                if (Bearbeiter.Equals(""))
+                {
+                    
+                }
             }
         }
 
@@ -212,6 +219,8 @@ namespace Weichen_Checkliste
                 ampel = "gelb";
             }
             SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
+            DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
+            selectedRow["Status"] = "gespeichert";
         }
 
         // Funktion zum Speichern in Excel
