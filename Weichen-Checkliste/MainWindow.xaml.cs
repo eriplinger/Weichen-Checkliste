@@ -214,15 +214,30 @@ namespace Weichen_Checkliste
         // Event-Handler für den "Speichern"-Button
         private void Speichern_Click(object sender, RoutedEventArgs e)
         {
-            string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-            string ampel = "grün";
-            if(!Kommentare.Text.Equals("ohne Befund"))
+            try
             {
-                ampel = "gelb";
+                string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+                string ampel = "grün";
+                if (!Kommentare.Text.Equals("ohne Befund"))
+                {
+                    ampel = "gelb";
+                }
+                SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
+                try
+                {
+                    DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
+                    if (selectedRow != null)
+                    {
+                        selectedRow["Status"] = "gespeichert";
+                    }
+                }catch(Exception ex)
+                {
+                    //keine Zeile selektiert. Kein Fehler
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Bitte Felder ausfüllen. Es konnte nicht gespeichert werden:" + ex.StackTrace.ToString());
             }
-            SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
-            DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
-            selectedRow["Status"] = "gespeichert";
         }
 
         // Funktion zum Speichern in Excel
@@ -257,6 +272,12 @@ namespace Weichen_Checkliste
             {
                 MessageBox.Show($"Fehler beim Speichern der Excel-Datei: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        // Event-Handler für Fotos
+        private void Foto_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Smile");
         }
     }
 }
