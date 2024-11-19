@@ -83,16 +83,12 @@
         GW201_ID1-->
 
     <!-- Logo -->
-    <Image Source="logo.png" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Height="80" />
+    <!-- Image Source="logo.png" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Height="80" /-->
 
     <!-- Datum -->
     <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
     <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- Bearbeiter -->
-    <!--
-        <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0" />-->
     <!-- Bearbeiter -->
     <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
     <ComboBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0">
@@ -161,18 +157,22 @@
                   VerticalAlignment="Stretch"
                   Grid.RowSpan="20" Grid.ColumnSpan="3"/>
 
-    <!--Grid.RowSpan="5" Grid.ColumnSpan="3"
-        HorizontalAlignment="Stretch" 
-        VerticalAlignment="Stretch"-->
-
-    <!--<Button Content="Zeile markieren" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Click="MarkRow_Click" />-->
     <!-- Laden -->
-    <Button Content="Laden" Grid.Row="2" Grid.Column="3" Click="Laden_Click"/>
+    <Button Content="Laden" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
 
     <!-- Speichern -->
-    <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Click="Speichern_Click"/>
+    <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
     
     <!-- Foto -->
     <Button Content="Foto" Grid.Row="8" Grid.Column="3" Click="Foto_Click"/>
+    
+    <!-- Befund hinzufügen -->
+    <Button Content="+" Grid.Row="9" Grid.Column="3" Click="BefundNeu_Click"/>
+    
+    <!-- Einstellungen -->
+    <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Click="Einstellungen_Click" Background="white">
+      <Image Source="C:\Users\eripl\Source\Repos\eriplinger\Weichen-Checkliste\Weichen-Checkliste\ssb-logo.png"/>
+    </Button>
+
   </Grid>
 </Window>

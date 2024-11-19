@@ -1,8 +1,6 @@
 ﻿
 
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Irony;
 using Microsoft.Win32;
 using System.Data;
 using System.IO;
@@ -10,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Text;
+using WpfWebcamApp;
 
 namespace Weichen_Checkliste
 {
@@ -214,29 +213,37 @@ namespace Weichen_Checkliste
         // Event-Handler für den "Speichern"-Button
         private void Speichern_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (Bearbeiter.Text.Equals("") || AktuellesDatum.Text.Equals("") || Anlagennr.Text.Equals("")) {
+                MessageBox.Show("Bitte Datum/Bearbeiter/Anlagennr./Befund ausfüllen. Es konnte nicht gespeichert werden.");
+            }
+            else
             {
-                string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-                string ampel = "grün";
-                if (!Kommentare.Text.Equals("ohne Befund"))
-                {
-                    ampel = "gelb";
-                }
-                SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
                 try
                 {
-                    DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
-                    if (selectedRow != null)
+                    string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+                    string ampel = "grün";
+                    if (!Kommentare.Text.Equals("ohne Befund"))
                     {
-                        selectedRow["Status"] = "gespeichert";
+                        ampel = "gelb";
                     }
-                }catch(Exception ex)
-                {
-                    //keine Zeile selektiert. Kein Fehler
+                    SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
+                    try
+                    {
+                        DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
+                        if (selectedRow != null)
+                        {
+                            selectedRow["Status"] = "gespeichert";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //keine Zeile selektiert. Kein Fehler
+                    }
                 }
-            }catch(Exception ex)
-            {
-                MessageBox.Show("Bitte Felder ausfüllen. Es konnte nicht gespeichert werden:" + ex.StackTrace.ToString());
+                catch (Exception ex)
+                {
+                    //Todo
+                }
             }
         }
 
@@ -277,7 +284,21 @@ namespace Weichen_Checkliste
         // Event-Handler für Fotos
         private void Foto_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Smile");
+            //MessageBox.Show("Smile");
+            FotoWindow fw = new FotoWindow();
+            fw.Activate();
+        }
+
+        // Event-Handler für Neuen Befund
+        private void BefundNeu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("neuen Befund wählen und einfügen", "neu", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+        }
+
+        // Event-Handler für Einstellungen
+        private void Einstellungen_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Einstellungen");
         }
     }
 }
