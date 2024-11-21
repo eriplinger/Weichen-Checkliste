@@ -170,9 +170,11 @@
     <Button Content="+" Grid.Row="9" Grid.Column="3" Click="BefundNeu_Click"/>
     
     <!-- Einstellungen -->
-    <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Click="Einstellungen_Click" Background="white">
-      <Image Source="C:\Users\eripl\Source\Repos\eriplinger\Weichen-Checkliste\Weichen-Checkliste\ssb-logo.png"/>
+    <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Background="white">
+      <Image Source="ssb-logo.png"/>
     </Button>
-
+        <!-- zum Aktivieren der Einstellungen: Click="Einstellungen_Click" -->
+      
+      
   </Grid>
 </Window>

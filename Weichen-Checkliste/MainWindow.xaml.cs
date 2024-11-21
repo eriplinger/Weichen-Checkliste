@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Globalization;
 using System.Text;
 using WpfWebcamApp;
+using DocumentFormat.OpenXml.CustomProperties;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Weichen_Checkliste
 {
@@ -18,7 +20,13 @@ namespace Weichen_Checkliste
     /// </summary>
     public partial class MainWindow : Window
     {
-        //string aktuellerBearbeiter = "Nachtdienst";
+        // Der Pfad zur Textdatei mit den Einstellungen
+        private readonly string settingsFilePath = "settings.txt";
+        private string ArbeitsvorratPath;
+        private string BefundlistenPath;
+        private string RückmeldungsPath;
+        private List<string> Befundliste;
+
 
         private DataTable dataTable;
         //private string AktuellesDatum;
@@ -40,8 +48,116 @@ namespace Weichen_Checkliste
         {
             InitializeComponent();
             dataTable = new DataTable();
+
+            LoadSettings();
+
+            LoadBefundliste();
         }
 
+        private void LoadBefundliste()
+        {
+
+            if (File.Exists(BefundlistenPath))
+            {
+                try
+                {
+                    // Lese alle Zeilen aus der Datei
+                    string[] lines = File.ReadAllLines(BefundlistenPath);
+                    foreach (string line in lines)
+                    {
+                        if (line.StartsWith("#"))
+                        {
+                            continue;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Fehler beim Laden der Befundliste: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Die Befundlisten-Datei wurde nicht gefunden.");
+                
+            }
+        }
+
+        // Methode zum Laden der Einstellungen aus der Textdatei
+        private void LoadSettings()
+        {
+            if (File.Exists(settingsFilePath))
+            {
+                try
+                {
+                    // Lese alle Zeilen aus der Datei
+                    string[] lines = File.ReadAllLines(settingsFilePath);
+                    foreach (string line in lines)
+                    {
+                        if (line.StartsWith("#"))
+                        {
+                            continue;
+                        }
+                        // Spalte die Zeilen in Schlüssel und Wert auf
+                        string[] keyValue = line.Split('=');
+                        if (keyValue.Length == 2)
+                        {
+                            string key = keyValue[0].Trim();
+                            string value = keyValue[1].Trim();
+
+                            // Überprüfe den Schlüssel und wende die Einstellungen an
+                            if (key == "ArbeitsvorratPath")
+                            {
+                                this.ArbeitsvorratPath = value;
+                                Console.WriteLine($"ArbeitsvorratPath: {value}");
+                            }
+                            else if (key == "BefundlistenPath")
+                            {
+                                this.BefundlistenPath = value;
+                                Console.WriteLine($"BefundlistenPath: {value}");
+                            }
+                            else if (key == "RückmeldungsPath")
+                            {
+                                this.RückmeldungsPath = value;
+                                Console.WriteLine($"RückmeldungsPath: {value}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Fehler beim Laden der Einstellungen: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Die Einstellungen-Datei wurde nicht gefunden. Eine neue Datei wird angelegt, bitte dort die korrekten Pfade hinterlegen und die Anwendung neu starten.");
+                SaveSettings("C:\\", "D:\\", "E:\\");
+            }
+        }
+
+        // Methode zum Speichern der Einstellungen in die Textdatei
+        private void SaveSettings(string pfad1, string pfad2, string pfad3)
+        {
+            try
+            {
+                // Erstelle den Inhalt der Datei
+                string[] lines = {
+                    $"# Settingsfile für Weichen-Checkliste",
+                    $"ArbeitsvorratPath = {pfad1}",
+                    $"BefundlistenPath = {pfad2}",
+                    $"RückmeldungsPath = {pfad3}"
+                };
+                // Schreibe die Zeilen in die Datei
+                File.WriteAllLines(settingsFilePath, lines);
+                MessageBox.Show("Einstellungen wurden erfolgreich gespeichert.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Speichern der Einstellungen: {ex.Message}");
+            }
+        }
 
         // Event-Handler für den "Laden"-Button
         private void Laden_Click(object sender, RoutedEventArgs e)
@@ -50,6 +166,7 @@ namespace Weichen_Checkliste
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
+            openFileDialog.InitialDirectory = ArbeitsvorratPath;
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -269,7 +386,7 @@ namespace Weichen_Checkliste
                     worksheet.Cell(2, 4).Value = Kommentare;
 
                     // Excel-Datei speichern
-                    string filePath = Weichennummer + "_" + Datum + ".xlsx";
+                    string filePath = this.RückmeldungsPath + Weichennummer + "_" + Datum + ".xlsx";
                     workbook.SaveAs(filePath);
                 }
 
@@ -298,7 +415,15 @@ namespace Weichen_Checkliste
         // Event-Handler für Einstellungen
         private void Einstellungen_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Einstellungen");
+            // Beispielhafte Pfade (diese könnten von einer Benutzeroberfläche kommen)
+            string newPfad1 = @"C:\Users\eripl\source\repos\Weichen-Checkliste\Weichen-Checkliste\bin\Debug\net8.0-windows";
+            string newPfad2 = "D:\\NeuerPfad2";
+            string newPfad3 = "E:\\NeuerPfad3";
+
+            // Rufe die Methode zum Speichern der Einstellungen auf
+            SaveSettings(newPfad1, newPfad2, newPfad3);
+            // Lade die Einstellungen erneut, um sicherzustellen, dass sie angewendet werden
+            LoadSettings();
         }
     }
 }
