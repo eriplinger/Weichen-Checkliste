@@ -25,7 +25,7 @@ namespace Weichen_Checkliste
         private string ArbeitsvorratPath;
         private string BefundlistenPath;
         private string RückmeldungsPath;
-        private List<string> Befundliste;
+        private List<string> Befundliste = new List<string>();
 
 
         private DataTable dataTable;
@@ -65,11 +65,14 @@ namespace Weichen_Checkliste
                     string[] lines = File.ReadAllLines(BefundlistenPath);
                     foreach (string line in lines)
                     {
-                        if (line.StartsWith("#"))
+                        if (string.IsNullOrEmpty(line) || line.StartsWith("#"))
                         {
                             continue;
                         }
-
+                        else
+                        {
+                            Befundliste.Add(line);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -82,6 +85,7 @@ namespace Weichen_Checkliste
                 MessageBox.Show("Die Befundlisten-Datei wurde nicht gefunden.");
                 
             }
+            //MessageBox.Show("Laden von Befunden erfolgreich. Anzahl: " + Befundliste.Count);
         }
 
         // Methode zum Laden der Einstellungen aus der Textdatei
@@ -114,7 +118,7 @@ namespace Weichen_Checkliste
                             }
                             else if (key == "BefundlistenPath")
                             {
-                                this.BefundlistenPath = value;
+                                this.BefundlistenPath = value + "\\Befundliste.txt";
                                 Console.WriteLine($"BefundlistenPath: {value}");
                             }
                             else if (key == "RückmeldungsPath")
@@ -339,11 +343,18 @@ namespace Weichen_Checkliste
                 {
                     string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                     string ampel = "grün";
-                    if (!Kommentare.Text.Equals("ohne Befund"))
+                    if (Kommentare.Text.Equals("ohne Befund"))
                     {
-                        ampel = "gelb";
+                        SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
                     }
-                    SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
+                    else {
+                        ampel = "gelb";
+                        string[] teile = Kommentare.Text.Split(';');
+                        foreach (var item in teile)
+                        {
+                            SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, item);
+                        }
+                    }
                     try
                     {
                         DataRowView selectedRow = (DataRowView)Arbeitsvorrat.SelectedItem;
@@ -386,11 +397,17 @@ namespace Weichen_Checkliste
                     worksheet.Cell(2, 4).Value = Kommentare;
 
                     // Excel-Datei speichern
-                    string filePath = this.RückmeldungsPath + Weichennummer + "_" + Datum + ".xlsx";
+                    string filePath = this.RückmeldungsPath + "\\" + Weichennummer + "_" + Datum + ".xlsx";
+                    int i = 1;
+                    while (File.Exists(filePath))
+                    {
+                        filePath = this.RückmeldungsPath + "\\" + Weichennummer + "_" + Datum + "_" + i + ".xlsx";
+                        i++;
+                    }
                     workbook.SaveAs(filePath);
                 }
 
-                MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -409,7 +426,25 @@ namespace Weichen_Checkliste
         // Event-Handler für Neuen Befund
         private void BefundNeu_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("neuen Befund wählen und einfügen", "neu", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            //MessageBox.Show("neuen Befund wählen und einfügen", "neu", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+
+            string neuerBefund = ShowBefundAuswahl(Befundliste);
+            if (neuerBefund != null)
+            {
+                //MessageBox.Show($"Sie haben '{neuerBefund}' ausgewählt.");
+                if (Kommentare.Text.Equals("ohne Befund"))
+                {
+                    Kommentare.Text = neuerBefund;
+                }
+                else
+                {
+                    Kommentare.Text += ";\n" + neuerBefund;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Keine Auswahl getroffen.");
+            }
         }
 
         // Event-Handler für Einstellungen
@@ -425,5 +460,14 @@ namespace Weichen_Checkliste
             // Lade die Einstellungen erneut, um sicherzustellen, dass sie angewendet werden
             LoadSettings();
         }
+
+        public string ShowBefundAuswahl(List<string> items)
+        {
+            var selectionWindow = new BefundAuswahlFenster(items);
+            bool? result = selectionWindow.ShowDialog();
+
+            return result == true ? selectionWindow.SelectedItem : null;
+        }
+
     }
 }

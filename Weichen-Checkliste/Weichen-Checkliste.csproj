@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Befundliste.txt" />
     <None Remove="settings.txt" />
     <None Remove="ssb-logo.png" />
   </ItemGroup>
@@ -22,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Befundliste.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="settings.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
