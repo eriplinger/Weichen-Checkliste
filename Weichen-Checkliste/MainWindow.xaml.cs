@@ -21,7 +21,7 @@ namespace Weichen_Checkliste
     public partial class MainWindow : Window
     {
         // Der Pfad zur Textdatei mit den Einstellungen
-        private readonly string settingsFilePath = "settings.txt";
+        private readonly string settingsFilePath = @".\settings.txt";
         private string ArbeitsvorratPath;
         private string BefundlistenPath;
         private string RückmeldungsPath;

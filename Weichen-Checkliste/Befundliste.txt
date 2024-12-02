@@ -1,5 +1,6 @@
 Befund1
 Befund2
+Beobachtung empfohlen
 Verschmutzung
 Abgenutzt
 Abdeckung fehlt
