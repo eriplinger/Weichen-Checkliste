@@ -1,4 +1,4 @@
 # Settingsfile für Weichen-Checkliste
-Arbeitsvorratpfad = C:\Users\eripl\source\repos\eriplinger\Weichen-Checkliste\Weichen-Checkliste
-Befundlistenpfad = C:\Users\eripl\Source\Repos\eriplinger\Weichen-Checkliste\Weichen-Checkliste\
-Rückmeldungspfad = C:\Users\eripl\source\repos\eriplinger\Weichen-Checkliste\Weichen-Checkliste
+Arbeitsvorratpfad = C:\ProgramData\SSB-AG\Weichen-Checkliste
+Befundlistenpfad = C:\ProgramData\SSB-AG\Weichen-Checkliste
+Rückmeldungspfad = C:\ProgramData\SSB-AG\Weichen-Checkliste

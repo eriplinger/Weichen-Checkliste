@@ -2,6 +2,7 @@
 
 using ClosedXML.Excel;
 using Microsoft.Win32;
+using System;
 using System.Data;
 using System.IO;
 using System.Windows;
@@ -23,7 +24,7 @@ namespace Weichen_Checkliste
         // Der Pfad zur Textdatei mit den Einstellungen
         private readonly string settingsFilePath = "settings.txt";
         private string ArbeitsvorratPath = "";
-        private string BefundlistenPath = "";
+        private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\SSB-AG\Weichen-Checkliste\";
         private string RückmeldungsPath = "";
         private List<string> Befundliste = new List<string>();
 

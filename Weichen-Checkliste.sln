@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weichen-Checkliste", "Weichen-Checkliste\Weichen-Checkliste.csproj", "{AF5641D4-F687-41F0-926F-A1C1C84E5A85}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SSB-Weichen-Installer", "SSB-Weichen-Installer\SSB-Weichen-Installer.vdproj", "{6C373F66-8448-4A69-8419-3A9B3EF7272F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SSB-Weichen-Checkliste", "SSB-Weichen-Checkliste\SSB-Weichen-Checkliste.vdproj", "{C18267E7-310F-4F5B-BF37-F4836CEB953D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5641D4-F687-41F0-926F-A1C1C84E5A85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C373F66-8448-4A69-8419-3A9B3EF7272F}.Debug|Any CPU.ActiveCfg = Debug
-		{6C373F66-8448-4A69-8419-3A9B3EF7272F}.Release|Any CPU.ActiveCfg = Release
+		{C18267E7-310F-4F5B-BF37-F4836CEB953D}.Debug|Any CPU.ActiveCfg = Debug
+		{C18267E7-310F-4F5B-BF37-F4836CEB953D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
