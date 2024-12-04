@@ -65,11 +65,14 @@
       <!--Arbeitsvorrat5-->
       <RowDefinition Height="30" />
       <!--Reserve-->
+            <RowDefinition Height="30"  />
+            <!-- Statusleiste -->
+        </Grid.RowDefinitions>
 
-    </Grid.RowDefinitions>
 
 
-    <!-- Format der Input-Datei
+
+        <!-- Format der Input-Datei
         Art
         Typ
         Anlagennr
@@ -158,7 +161,7 @@
                   Grid.RowSpan="20" Grid.ColumnSpan="3"/>
 
     <!-- Laden -->
-    <Button Content="Laden" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
+    <Button Content="Laden" Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
 
     <!-- Speichern -->
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
@@ -174,7 +177,34 @@
       <Image Source="ssb-logo.png"/>
     </Button>
         <!-- zum Aktivieren der Einstellungen: Click="Einstellungen_Click" -->
+
+
+        <!-- StatusBar -->
+        <StatusBar Grid.Row="12" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="3" Name="MainStatusBar">
+            <StatusBarItem>
+                <TextBlock Text="Möglicherweise noch nicht aktualisiert." Name="StatusMessage" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding AktuelleZeit}" />
+            </StatusBarItem>
+            <Separator Margin="5,0" />
+            <StatusBarItem>
+                <TextBlock Text="Verbindungsstatus:" /> 
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="ConnectionStatus" Text="Nicht verbunden" />
+            </StatusBarItem>
+            <Separator Margin="5,0" />
+            <StatusBarItem>
+                <TextBlock Text="Befunde im Ordner:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="FileCount" Text="0" />
+            </StatusBarItem>
+        </StatusBar>
       
       
-  </Grid>
+       
+
+    </Grid>
 </Window>

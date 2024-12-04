@@ -12,6 +12,7 @@ using System.Text;
 using WpfWebcamApp;
 using DocumentFormat.OpenXml.CustomProperties;
 using DocumentFormat.OpenXml.Wordprocessing;
+using System.Windows.Threading;
 
 namespace Weichen_Checkliste
 {
@@ -26,8 +27,10 @@ namespace Weichen_Checkliste
         private string ArbeitsvorratPath = "";
         private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\";
         private string RückmeldungsPath = "";
-        private string SyncPath = "";
+        private string SyncPath = @"\\remote-server\folder";
+        private bool isConnected = false;
         private List<string> Befundliste = new List<string>();
+
 
 
         private DataTable dataTable;
@@ -46,6 +49,10 @@ namespace Weichen_Checkliste
         //private string Status;
         //private string Kommentare;
 
+        public string AktuelleZeit => DateTime.Now.ToString("HH:mm");
+
+        private DispatcherTimer aktualisierungsTimer;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -54,6 +61,14 @@ namespace Weichen_Checkliste
             LoadSettings();
 
             LoadBefundliste();
+
+            // Timer für die Uhrzeit bei Aktualisierung
+            aktualisierungsTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(15)
+            };
+            aktualisierungsTimer.Tick += Timer_Tick;
+            aktualisierungsTimer.Start();
         }
 
         private void LoadBefundliste()
@@ -460,7 +475,7 @@ namespace Weichen_Checkliste
         // Event-Handler für Einstellungen
         private void Einstellungen_Click(object sender, EventArgs e)
         {
-            // Beispielhafte Pfade (diese könnten von einer Benutzeroberfläche kommen)
+            // Beispielhafte Pfade
             string newPfad1 = @"C:\Users\eripl\source\repos\Weichen-Checkliste\Weichen-Checkliste\bin\Debug\net8.0-windows";
             string newPfad2 = "D:\\NeuerPfad2";
             string newPfad3 = "E:\\NeuerPfad3";
@@ -482,6 +497,106 @@ namespace Weichen_Checkliste
         private void Foto_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("smile :-)");
+        }
+
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await UpdateFileStatusAsync();
+            // Aktualisiere die Zeit in der Statusleiste
+            //StatusMessage.Text = $"Aktualisiert um {DateTime.Now:HH:mm}";
+        }
+
+        private async Task UpdateFileStatusAsync()
+        {
+            try
+            {
+                if (Directory.Exists(SyncPath))
+                {
+                    isConnected = true;
+                    ConnectionStatus.Text = "Verbunden";
+                    await CopyRemoteFolderAsync();
+                    await MoveRemoteFolderAsync();
+                    StatusMessage.Text = $"Aktualisiert um {DateTime.Now:HH:mm}";
+                }
+                else
+                {
+                    HandleConnectionLost();
+                }
+            }
+            catch (Exception)
+            {
+                HandleConnectionLost();
+            }
+
+            try
+            {
+                if (Directory.Exists(RückmeldungsPath))
+                {
+
+                    // Anzahl der Dateien zählen
+                    var files = await Task.Run(() => Directory.GetFiles(RückmeldungsPath));
+                    FileCount.Text = files.Length.ToString();
+
+                }
+            }catch (Exception)
+            {
+                MessageBox.Show("Fehler im Ordner für die Befunde. Kein Zugriff möglich");
+            }  
+        }
+
+        private void HandleConnectionLost()
+        {
+            isConnected = false;
+            ConnectionStatus.Text = "Nicht verbunden";
+        }
+
+        private async Task CopyRemoteFolderAsync()
+        {
+            string remoteFolder = SyncPath + @"\10_Arbeitsvorbereitung"; // Pfad zum Remote-Ordner
+            string localFolder = ArbeitsvorratPath;       // Zielordner auf dem lokalen Rechner
+
+            if (Directory.Exists(remoteFolder) && Directory.Exists(localFolder))
+            {
+                try
+                {
+                    // Kopierprozess starten
+                    await Task.Run(() => FolderCopierer.CopyFolder(remoteFolder, localFolder));
+                    StatusMessage.Text = "Kopieren abgeschlossen.";
+                }
+                catch (Exception ex)
+                {
+                    StatusMessage.Text = $"Fehler: {ex.Message}";
+                }
+            }
+            else
+            {
+                StatusMessage.Text = "Remote-Ordner nicht erreichbar.";
+            }
+        }
+
+        private async Task MoveRemoteFolderAsync()
+        {
+            string remoteFolder = SyncPath + @"\20_Arbeitsnachbereitung"; // Pfad zum Remote-Ordner
+            string localFolder = RückmeldungsPath;       // Zielordner auf dem lokalen Rechner
+
+            if (Directory.Exists(remoteFolder) && Directory.Exists(localFolder))
+            {
+                try
+                {
+                    // Verschieben starten
+                    await Task.Run(() => FolderCopierer.MoveFolder(localFolder, remoteFolder));
+                    StatusMessage.Text = "Verschieben abgeschlossen.";
+                }
+                catch (Exception ex)
+                {
+                    StatusMessage.Text = $"Fehler: {ex.Message}";
+                }
+            }
+            else
+            {
+                StatusMessage.Text = "Remote-Ordner nicht erreichbar.";
+            }
         }
     }
 }
