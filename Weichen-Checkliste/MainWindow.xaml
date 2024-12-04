@@ -164,7 +164,7 @@
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
     
     <!-- Foto -->
-    <Button Content="Foto" Grid.Row="8" Grid.Column="3" Click="Foto_Click"/>
+    <!--<Button Content="Foto" Grid.Row="8" Grid.Column="3" Click="Foto_Click"/>-->
     
     <!-- Befund hinzufügen -->
     <Button Content="+" Grid.Row="9" Grid.Column="3" Click="BefundNeu_Click"/>

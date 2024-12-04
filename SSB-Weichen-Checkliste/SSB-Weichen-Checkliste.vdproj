@@ -27,13 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C999548E95BC420F9B78D8B1EB8353F3"
+        "MsmKey" = "8:_FB16129C73E94397851EAF2271ED8E76"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_ECDD0FC5DBED4352AE231FB94065A0F9"
+        "MsmKey" = "8:_FF571013BEAC4E37A0D15117538CF53F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -62,6 +62,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -146,12 +154,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C999548E95BC420F9B78D8B1EB8353F3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB16129C73E94397851EAF2271ED8E76"
             {
-            "SourcePath" = "8:..\\Weichen-Checkliste\\Befundliste.txt"
-            "TargetName" = "8:Befundliste.txt"
+            "SourcePath" = "8:..\\Weichen-Checkliste\\settings.txt"
+            "TargetName" = "8:settings.txt"
             "Tag" = "8:"
-            "Folder" = "8:_943443CF69904DADADD9B89CAD065EF3"
+            "Folder" = "8:_40B8E001E5BC43C4BE0F8989BA3D4374"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -166,12 +174,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECDD0FC5DBED4352AE231FB94065A0F9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF571013BEAC4E37A0D15117538CF53F"
             {
-            "SourcePath" = "8:..\\Weichen-Checkliste\\settings.txt"
-            "TargetName" = "8:settings.txt"
+            "SourcePath" = "8:..\\Weichen-Checkliste\\Befundliste.txt"
+            "TargetName" = "8:Befundliste.txt"
             "Tag" = "8:"
-            "Folder" = "8:_943443CF69904DADADD9B89CAD065EF3"
+            "Folder" = "8:_40B8E001E5BC43C4BE0F8989BA3D4374"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -192,17 +200,6 @@
         }
         "Folder"
         {
-            "{1525181F-901A-416C-8A58-119130FE478E}:_943443CF69904DADADD9B89CAD065EF3"
-            {
-            "Name" = "8:#1910"
-            "AlwaysCreate" = "11:TRUE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:CommonFilesFolder"
-                "Folders"
-                {
-                }
-            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_BB2C4F2CD01E4A73AC071766E9F252FE"
             {
             "Name" = "8:#1919"
@@ -227,7 +224,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_F51FC13A88D74EF285332CDB008653E9"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\SSB\\WeichenCheckliste"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -235,6 +232,39 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_40B8E001E5BC43C4BE0F8989BA3D4374"
+                    {
+                    "Name" = "8:Weichen"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_8637FF647D3541FDA63FBD0B48197CFA"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_0EA7886CD9BA45E6B0CCD5E0836778B1"
+                            {
+                            "Name" = "8:20_Arbeitsnachbereitung"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_D21BD54BE72E4913A8EB01C76E8D4893"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_9137D77D382D4300A7D0020639214501"
+                            {
+                            "Name" = "8:10_Arbeitsvorbereitung"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_29867DC1C64C4918A741D967038A7B6B"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -254,7 +284,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SSB-Weichen-Checkliste"
         "ProductCode" = "8:{4EAF3613-CF99-4D1C-8F3A-ADC0044769E2}"
-        "PackageCode" = "8:{433C0B28-9344-4A8D-A1E9-58C02010B520}"
+        "PackageCode" = "8:{88E0DFA0-D416-451B-80AD-43F160005841}"
         "UpgradeCode" = "8:{0992FC69-596A-4E21-ABA6-0BAF0C6D96B3}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -262,7 +292,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:SSB-AG"
+        "Manufacturer" = "8:SSB"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:SSB-Weichen-Checkliste"

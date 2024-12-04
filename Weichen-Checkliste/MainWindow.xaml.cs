@@ -22,10 +22,11 @@ namespace Weichen_Checkliste
     public partial class MainWindow : Window
     {
         // Der Pfad zur Textdatei mit den Einstellungen
-        private readonly string settingsFilePath = @".\settings.txt";
+        private readonly string settingsFilePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\settings.txt";
         private string ArbeitsvorratPath = "";
-        private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\SSB-AG\Weichen-Checkliste\";
+        private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\";
         private string RückmeldungsPath = "";
+        private string SyncPath = "";
         private List<string> Befundliste = new List<string>();
 
 
@@ -96,6 +97,9 @@ namespace Weichen_Checkliste
             {
                 try
                 {
+                    // Registrierung von zusätzlichen Encodings, falls nötig (z.B. für Windows-1252)
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
                     // Lese alle Zeilen aus der Datei
                     string[] lines = File.ReadAllLines(settingsFilePath);
                     foreach (string line in lines)
@@ -122,10 +126,15 @@ namespace Weichen_Checkliste
                                 this.BefundlistenPath = value + "\\Befundliste.txt";
                                 Console.WriteLine($"BefundlistenPath: {value}");
                             }
-                            else if (key == "RückmeldungsPath")
+                            else if (key == "RückmeldungsPath" || key == "RÃ¼ckmeldungsPath")
                             {
                                 this.RückmeldungsPath = value;
                                 Console.WriteLine($"RückmeldungsPath: {value}");
+                            }
+                            else if (key == "SyncPath")
+                            {
+                                this.SyncPath = value;
+                                Console.WriteLine($"SyncPath: {value}");
                             }
                         }
                     }
@@ -408,7 +417,7 @@ namespace Weichen_Checkliste
                     workbook.SaveAs(filePath);
                 }
 
-                //MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -470,5 +479,9 @@ namespace Weichen_Checkliste
             return result == true ? selectionWindow.SelectedItem : null;
         }
 
+        private void Foto_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("smile :-)");
+        }
     }
 }

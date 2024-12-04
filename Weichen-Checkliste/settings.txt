@@ -1,4 +1,5 @@
-# Settingsfile für Weichen-Checkliste
-Arbeitsvorratpfad = C:\ProgramData\SSB-AG\Weichen-Checkliste
-Befundlistenpfad = C:\ProgramData\SSB-AG\Weichen-Checkliste
-Rückmeldungspfad = C:\ProgramData\SSB-AG\Weichen-Checkliste
+# Settingsfile fÃ¼r Weichen-Checkliste
+ArbeitsvorratPath = C:\ProgramData\Weichen\10_Arbeitsvorbereitung
+BefundlistenPath = C:\ProgramData\Weichen
+RÃ¼ckmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung
+SyncPath = W:\Transfer\Weichen
