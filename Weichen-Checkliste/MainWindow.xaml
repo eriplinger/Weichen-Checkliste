@@ -161,7 +161,7 @@
                   Grid.RowSpan="20" Grid.ColumnSpan="3"/>
 
     <!-- Laden -->
-    <Button Content="Laden" Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
+    <Button Content="Laden" Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
 
     <!-- Speichern -->
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
@@ -170,7 +170,7 @@
     <!--<Button Content="Foto" Grid.Row="8" Grid.Column="3" Click="Foto_Click"/>-->
     
     <!-- Befund hinzufügen -->
-    <Button Content="+" Grid.Row="9" Grid.Column="3" Click="BefundNeu_Click"/>
+        <Button Content="+" Grid.Row="7" Grid.RowSpan="2" Grid.Column="3" Click="BefundNeu_Click"/>
     
     <!-- Einstellungen -->
     <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Background="white">

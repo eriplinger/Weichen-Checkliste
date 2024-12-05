@@ -65,7 +65,7 @@ namespace Weichen_Checkliste
             // Timer für die Uhrzeit bei Aktualisierung
             aktualisierungsTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(15)
+                Interval = TimeSpan.FromSeconds(60)
             };
             aktualisierungsTimer.Tick += Timer_Tick;
             aktualisierungsTimer.Start();
@@ -347,7 +347,7 @@ namespace Weichen_Checkliste
                     GW201_ID1.Text = "";
                     
                 }
-                Kommentare.Text = "ohne Befund";
+                Kommentare.Text = "ohne Auffälligkeit";
 
                 if (Bearbeiter.Equals(""))
                 {
@@ -368,7 +368,7 @@ namespace Weichen_Checkliste
                 {
                     string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                     string ampel = "grün";
-                    if (Kommentare.Text.Equals("ohne Befund"))
+                    if (Kommentare.Text.Equals("ohne Auffälligkeit"))
                     {
                         SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
                     }
@@ -457,11 +457,10 @@ namespace Weichen_Checkliste
             if (neuerBefund != null)
             {
                 //MessageBox.Show($"Sie haben '{neuerBefund}' ausgewählt.");
-                if (Kommentare.Text.Equals("ohne Befund"))
+                if (Kommentare.Text.Equals("ohne Auffälligkeit") || Kommentare.Text.Equals(""))
                 {
                     Kommentare.Text = neuerBefund;
-                }
-                else
+                }else
                 {
                     Kommentare.Text += ";\n" + neuerBefund;
                 }
