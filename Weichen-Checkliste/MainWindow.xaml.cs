@@ -9,10 +9,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Text;
-using WpfWebcamApp;
 using DocumentFormat.OpenXml.CustomProperties;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Windows.Threading;
+using OpenCvSharp;
+using WpfWebcamApp;
 
 namespace Weichen_Checkliste
 {
@@ -20,18 +21,19 @@ namespace Weichen_Checkliste
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         // Der Pfad zur Textdatei mit den Einstellungen
         private readonly string settingsFilePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\settings.txt";
         private string ArbeitsvorratPath = "";
         private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\";
         private string RückmeldungsPath = "";
+        private string lastSavedPhotoPath = "";
+        private int bilderZaehler = 0;
+        private string BilderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\Bilder";
         private string SyncPath = @"\\remote-server\folder";
         private bool isConnected = false;
         private List<string> Befundliste = new List<string>();
-
-
 
         private DataTable dataTable;
         //private string AktuellesDatum;
@@ -440,14 +442,6 @@ namespace Weichen_Checkliste
             }
         }
 
-        // Event-Handler für Fotos
-        private void Foto_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("Smile");
-            FotoWindow fw = new FotoWindow();
-            fw.Activate();
-        }
-
         // Event-Handler für Neuen Befund
         private void BefundNeu_Click(object sender, EventArgs e)
         {
@@ -493,9 +487,14 @@ namespace Weichen_Checkliste
             return result == true ? selectionWindow.SelectedItem : null;
         }
 
-        private void Foto_Click(object sender, RoutedEventArgs e)
+        private async void Foto_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("smile :-)");
+            //MessageBox.Show("smile :-)");
+
+            // öffne das Foto-Fenster
+            FotoWindow fotoWindow = new FotoWindow();
+            fotoWindow.Owner = this; // Setze das Hauptfenster als Besitzer
+            fotoWindow.ShowDialog();
         }
 
 
@@ -596,6 +595,24 @@ namespace Weichen_Checkliste
             {
                 StatusMessage.Text = "Remote-Ordner nicht erreichbar.";
             }
+        }
+
+        private string GetNextFileNumber(string directory, string filePattern)
+        {
+            var files = Directory.GetFiles(directory, filePattern);
+            int max = 0;
+            foreach (var file in files)
+            {
+                var name = Path.GetFileNameWithoutExtension(file);
+                var parts = name.Split('_');
+                if (parts.Length > 0)
+                {
+                    var last = parts[^1];
+                    if (int.TryParse(last, out int num))
+                        if (num > max) max = num;
+                }
+            }
+            return (max + 1).ToString("D7");
         }
     }
 }

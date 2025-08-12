@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using AForge.Video;
@@ -11,90 +12,121 @@ namespace WpfWebcamApp
 {
     public partial class FotoWindow : Window
     {
-        private FilterInfoCollection videoDevices; // Sammlung aller verfügbaren Videoeingabegeräte (z.B. Webcams)
-        private VideoCaptureDevice videoSource;    // Objekt zum Abrufen des Videostreams
+        private readonly FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
+        private bool isClosing = false; // Flag zum Abbruch von NewFrame
 
         public FotoWindow()
         {
-            //InitializeComponent();
-            // Alle verfügbaren Videoeingabegeräte abrufen
+            InitializeComponent();
+
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             if (videoDevices.Count == 0)
             {
                 MessageBox.Show("Keine Webcam gefunden!");
+                Close();
                 return;
             }
 
-            // Erstes Gerät als Quelle auswählen
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(Video_NewFrame);
+            videoSource.NewFrame += Video_NewFrame;
         }
 
-        // Ereignishandler für das NewFrame-Ereignis
         private void Video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            // Das Bild von der Kamera abrufen
-            Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
+            if (isClosing) return; // Falls Fenster im Schließen → Frame ignorieren
 
-            // In ein BitmapImage umwandeln, um es in WPF anzuzeigen
-            MemoryStream memoryStream = new MemoryStream();
-            bitmap.Save(memoryStream, ImageFormat.Bmp);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            try
+            {
+                using Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
+                using MemoryStream memoryStream = new MemoryStream();
+                bitmap.Save(memoryStream, ImageFormat.Bmp);
 
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.StreamSource = memoryStream;
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.EndInit();
+                // Sichere Kopie des Streams
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = new MemoryStream(memoryStream.ToArray());
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
 
-            bitmapImage.Freeze(); // Erforderlich, um den UI-Thread zu entkoppeln
-            Dispatcher.Invoke(() => cameraFeed.Source = bitmapImage); // Bild im UI-Thread anzeigen
+                // Nicht blockierend aktualisieren
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (!isClosing && cameraFeed != null)
+                        cameraFeed.Source = bitmapImage;
+                }));
+            }
+            catch
+            {
+                // Fehler ignorieren oder loggen
+            }
         }
 
-        // Startet den Videostream
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (videoSource != null && !videoSource.IsRunning)
-            {
                 videoSource.Start();
-            }
         }
 
-        // Nimmt ein Foto auf und speichert es
         private void CaptureButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cameraFeed.Source != null)
-            {
-                BitmapSource bitmapSource = (BitmapSource)cameraFeed.Source;
+            if (cameraFeed.Source is BitmapSource bitmapSource)
                 SavePhoto(bitmapSource);
-            }
         }
 
-        // Speichert das Foto als JPG-Datei
         private void SavePhoto(BitmapSource bitmapSource)
         {
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
 
-            string filePath = "Foto_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                encoder.Save(fileStream);
-            }
+            string filePath = $"Foto_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
+            using FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            encoder.Save(fileStream);
 
             MessageBox.Show($"Foto gespeichert: {filePath}");
         }
 
-        // Beenden des Videostreams beim Schließen des Fensters
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (videoSource != null && videoSource.IsRunning)
-            {
-                videoSource.SignalToStop();
-                videoSource.WaitForStop();
-            }
+            isClosing = true;
+            await StopCameraAsync();
             base.OnClosing(e);
+        }
+
+        private async void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            isClosing = true;
+            await StopCameraAsync();
+            Close();
+        }
+
+        private async Task StopCameraAsync()
+        {
+            try
+            {
+                if (videoSource != null)
+                {
+                    videoSource.NewFrame -= Video_NewFrame;
+
+                    if (videoSource.IsRunning)
+                    {
+                        videoSource.SignalToStop();
+                        await Task.Run(() => videoSource.WaitForStop()); // verhindert UI-Blockade
+                    }
+                }
+            }
+            catch
+            {
+                // optional: Logging
+            }
+            finally
+            {
+                videoSource = null;
+                if (cameraFeed != null)
+                    cameraFeed.Source = null;
+            }
         }
     }
 }

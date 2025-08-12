@@ -6,65 +6,65 @@
         xmlns:local="clr-namespace:Weichen_Checkliste"
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
-  <Grid Margin="10">
+    <Grid Margin="10">
 
-    <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="2*" />
-      <ColumnDefinition Width="2*" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+        <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    <Grid.RowDefinitions>
-      <!-- Hier alle Zeilen definieren -->
-      <RowDefinition Height="30" />
-      <!--Datum-->
-      <RowDefinition Height="30" />
-      <!--Nummern-->
-      <RowDefinition Height="30" />
-      <!--Art-->
-      <RowDefinition Height="30" />
-      <!--Ort-->
-      <RowDefinition Height="30" />
-      <!--Historie-->
-      <RowDefinition Height="30" />
-      <!--Gleis-->
-      <RowDefinition Height="30" />
-      <!--Status-->
-      <RowDefinition Height="30" />
-      <!--Kommentar1-->
-      <RowDefinition Height="30" />
-      <!--Kommentar2-->
-      <RowDefinition Height="30" />
-      <!--Kommentar3-->
-      <RowDefinition Height="30" />
-      <!--Kommentar4-->
-      <RowDefinition Height="30" />
-      <!--Kommentar5-->
-      <RowDefinition Height="30" />
-      <!--Buttons-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat1-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat2-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat3-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat4-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat5-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat1-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat2-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat3-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat4-->
-      <RowDefinition Height="30" />
-      <!--Arbeitsvorrat5-->
-      <RowDefinition Height="30" />
-      <!--Reserve-->
+        <Grid.RowDefinitions>
+            <!-- Hier alle Zeilen definieren -->
+            <RowDefinition Height="30" />
+            <!--Datum-->
+            <RowDefinition Height="30" />
+            <!--Nummern-->
+            <RowDefinition Height="30" />
+            <!--Art-->
+            <RowDefinition Height="30" />
+            <!--Ort-->
+            <RowDefinition Height="30" />
+            <!--Historie-->
+            <RowDefinition Height="30" />
+            <!--Gleis-->
+            <RowDefinition Height="30" />
+            <!--Status-->
+            <RowDefinition Height="30" />
+            <!--Kommentar1-->
+            <RowDefinition Height="30" />
+            <!--Kommentar2-->
+            <RowDefinition Height="30" />
+            <!--Kommentar3-->
+            <RowDefinition Height="30" />
+            <!--Kommentar4-->
+            <RowDefinition Height="30" />
+            <!--Kommentar5-->
+            <RowDefinition Height="30" />
+            <!--Buttons-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat1-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat2-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat3-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat4-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat5-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat1-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat2-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat3-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat4-->
+            <RowDefinition Height="30" />
+            <!--Arbeitsvorrat5-->
+            <RowDefinition Height="30" />
+            <!--Reserve-->
             <RowDefinition Height="30"  />
             <!-- Statusleiste -->
         </Grid.RowDefinitions>
@@ -85,71 +85,71 @@
         LETZTE_INSTANDHALTUNG	
         GW201_ID1-->
 
-    <!-- Logo -->
-    <!-- Image Source="logo.png" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Height="80" /-->
+        <!-- Logo -->
+        <!-- Image Source="logo.png" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Height="80" /-->
 
-    <!-- Datum -->
-    <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-    <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- Datum -->
+        <Label Content="Datum:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+        <DatePicker Name="AktuellesDatum" Grid.Row="0" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- Bearbeiter -->
-    <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-    <ComboBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0">
-      <ComboBoxItem Content="Frühdienst" />
-      <ComboBoxItem Content="Spätdienst" />
-      <ComboBoxItem Content="Nachtdienst" />
-    </ComboBox>
+        <!-- Bearbeiter -->
+        <Label Content="Bearbeiter:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+        <ComboBox Name="Bearbeiter" Grid.Row="0" Grid.Column="1" Margin="120,0,0,0">
+            <ComboBoxItem Content="Frühdienst" />
+            <ComboBoxItem Content="Spätdienst" />
+            <ComboBoxItem Content="Nachtdienst" />
+        </ComboBox>
 
-    <!-- Anlagennr -->
-    <Label Content="Anlagennr:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="Anlagennr" Grid.Row="1" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- Anlagennr -->
+        <Label Content="Anlagennr:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Anlagennr" Grid.Row="1" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- SAP-Nr. -->
-    <Label Content="SAP-Nr.:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-    <TextBox Name="SAPNr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
+        <!-- SAP-Nr. -->
+        <Label Content="SAP-Nr.:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="SAPNr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
 
-    <!-- Art -->
-    <Label Content="Art:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="Art" Grid.Row="2" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- Art -->
+        <Label Content="Art:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Art" Grid.Row="2" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- Typ -->
-    <Label Content="Typ:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
-    <TextBox Name="Typ" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0" />
+        <!-- Typ -->
+        <Label Content="Typ:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Typ" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0" />
 
-    <!-- Einbauort -->
-    <Label Content="Einbauort:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="Einbauort" Grid.Row="3" Grid.Column="0" Margin="120,0,0,0" Grid.ColumnSpan="2"/>
+        <!-- Einbauort -->
+        <Label Content="Einbauort:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Einbauort" Grid.Row="3" Grid.Column="0" Margin="120,0,0,0" Grid.ColumnSpan="2"/>
 
-    <!-- Einbau Ur-Weiche -->
-    <Label Content="Einbau Ur-Weiche:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="EinbauUrWeiche" Grid.Row="4" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- Einbau Ur-Weiche -->
+        <Label Content="Einbau Ur-Weiche:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="EinbauUrWeiche" Grid.Row="4" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- Erneuerung -->
-    <Label Content="Erneuerung:" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
-    <TextBox Name="Erneuerung" Grid.Row="4" Grid.Column="1" Margin="120,0,0,0" />
+        <!-- Erneuerung -->
+        <Label Content="Erneuerung:" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Erneuerung" Grid.Row="4" Grid.Column="1" Margin="120,0,0,0" />
 
-    <!-- Stammgleis -->
-    <Label Content="Stammgleis:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="Stammgleis" Grid.Row="5" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- Stammgleis -->
+        <Label Content="Stammgleis:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Stammgleis" Grid.Row="5" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- Zweiggleis -->
-    <Label Content="Zweiggleis:" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
-    <TextBox Name="Zweiggleis" Grid.Row="5" Grid.Column="1" Margin="120,0,0,0" />
+        <!-- Zweiggleis -->
+        <Label Content="Zweiggleis:" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Zweiggleis" Grid.Row="5" Grid.Column="1" Margin="120,0,0,0" />
 
-    <!-- LETZTE_INSTANDHALTUNG -->
-    <Label Content="Letzte Instandhaltung:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
-    <TextBox Name="LetzteInstandhaltung" Grid.Row="6" Grid.Column="0" Margin="120,0,0,0" />
+        <!-- LETZTE_INSTANDHALTUNG -->
+        <Label Content="Letzte Instandhaltung:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="LetzteInstandhaltung" Grid.Row="6" Grid.Column="0" Margin="120,0,0,0" />
 
-    <!-- GW201_ID1 -->
-    <Label Content="GW201_ID1:" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
-    <TextBox Name="GW201_ID1" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
+        <!-- GW201_ID1 -->
+        <Label Content="GW201_ID1:" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="GW201_ID1" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
 
-    <!-- Kommentare -->
-    <Label Content="Kommentare:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" />
-    <TextBox Name="Kommentare" Grid.Row="7" Grid.Column="0" Margin="120,0,0,0" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="5" Grid.ColumnSpan="2" />
+        <!-- Kommentare -->
+        <Label Content="Kommentare:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" />
+        <TextBox Name="Kommentare" Grid.Row="7" Grid.Column="0" Margin="120,0,0,0" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="5" Grid.ColumnSpan="2" />
 
-    <!-- Arbeitsvorrat -->
-    <DataGrid Name="Arbeitsvorrat" 
+        <!-- Arbeitsvorrat -->
+        <DataGrid Name="Arbeitsvorrat" 
                   Grid.Row="13" Grid.Column="0" 
                   AutoGenerateColumns="True" 
                   CanUserAddRows="False" 
@@ -161,7 +161,7 @@
                   Grid.RowSpan="20" Grid.ColumnSpan="3"/>
 
     <!-- Laden -->
-    <Button Content="Laden" Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
+    <Button Content="Laden" Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
 
     <!-- Speichern -->
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
@@ -170,7 +170,7 @@
     <!--<Button Content="Foto" Grid.Row="8" Grid.Column="3" Click="Foto_Click"/>-->
     
     <!-- Befund hinzufügen -->
-        <Button Content="+" Grid.Row="7" Grid.RowSpan="2" Grid.Column="3" Click="BefundNeu_Click"/>
+    <Button Content="+" Grid.Row="9" Grid.Column="3" Click="BefundNeu_Click"/>
     
     <!-- Einstellungen -->
     <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Background="white">
@@ -189,7 +189,7 @@
             </StatusBarItem>
             <Separator Margin="5,0" />
             <StatusBarItem>
-                <TextBlock Text="Verbindungsstatus:" /> 
+                <TextBlock Text="Verbindungsstatus:" />
             </StatusBarItem>
             <StatusBarItem>
                 <TextBlock Name="ConnectionStatus" Text="Nicht verbunden" />
@@ -201,10 +201,17 @@
             <StatusBarItem>
                 <TextBlock Name="FileCount" Text="0" />
             </StatusBarItem>
+            <Separator Margin="5,0" />
+            <StatusBarItem>
+                <TextBlock Text="Fotos im Ordner:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="FotoCount" Text="0" />
+            </StatusBarItem>
         </StatusBar>
-      
-      
-       
+
+
+
 
     </Grid>
 </Window>
