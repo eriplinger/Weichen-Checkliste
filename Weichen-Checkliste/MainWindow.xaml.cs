@@ -30,7 +30,7 @@ namespace Weichen_Checkliste
         private string RückmeldungsPath = "";
         private string lastSavedPhotoPath = "";
         private int bilderZaehler = 0;
-        private string BilderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\Bilder";
+        private string BilderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\40_Bilder";
         private string SyncPath = @"\\remote-server\folder";
         private bool isConnected = false;
         private List<string> Befundliste = new List<string>();
@@ -152,6 +152,11 @@ namespace Weichen_Checkliste
                             {
                                 this.SyncPath = value;
                                 Console.WriteLine($"SyncPath: {value}");
+                            }
+                            else if (key == "BilderPath")
+                            {
+                                this.BilderPath = value;
+                                Console.WriteLine($"BilderPath: {value}");
                             }
                         }
                     }
@@ -492,7 +497,7 @@ namespace Weichen_Checkliste
             //MessageBox.Show("smile :-)");
 
             // öffne das Foto-Fenster
-            FotoWindow fotoWindow = new FotoWindow();
+            FotoWindow fotoWindow = new FotoWindow(BilderPath, Anlagennr.Text);
             fotoWindow.Owner = this; // Setze das Hauptfenster als Besitzer
             fotoWindow.ShowDialog();
         }
@@ -537,6 +542,12 @@ namespace Weichen_Checkliste
                     FileCount.Text = files.Length.ToString();
 
                 }
+                if (Directory.Exists(BilderPath))
+                {
+                    // Anzahl der Dateien zählen
+                    var files = await Task.Run(() => Directory.GetFiles(BilderPath));
+                    FotoCount.Text = files.Length.ToString(); 
+                }
             }catch (Exception)
             {
                 MessageBox.Show("Fehler im Ordner für die Befunde. Kein Zugriff möglich");
@@ -576,7 +587,9 @@ namespace Weichen_Checkliste
         private async Task MoveRemoteFolderAsync()
         {
             string remoteFolder = SyncPath + @"\20_Arbeitsnachbereitung"; // Pfad zum Remote-Ordner
+            string remoteBilder = SyncPath + @"\40_Bilder"; // Pfad zum Remote-Ordner für Bilder
             string localFolder = RückmeldungsPath;       // Zielordner auf dem lokalen Rechner
+            string localBilder = BilderPath;
 
             if (Directory.Exists(remoteFolder) && Directory.Exists(localFolder))
             {
@@ -584,7 +597,7 @@ namespace Weichen_Checkliste
                 {
                     // Verschieben starten
                     await Task.Run(() => FolderCopierer.MoveFolder(localFolder, remoteFolder));
-                    StatusMessage.Text = "Verschieben abgeschlossen.";
+                    StatusMessage.Text = "Verschieben der Befunde abgeschlossen.";
                 }
                 catch (Exception ex)
                 {
@@ -593,8 +606,26 @@ namespace Weichen_Checkliste
             }
             else
             {
-                StatusMessage.Text = "Remote-Ordner nicht erreichbar.";
+                StatusMessage.Text = "Remote-Ordner für Befunde nicht erreichbar.";
             }
+            if (Directory.Exists(remoteBilder) && Directory.Exists(localBilder))
+            {
+                try
+                {
+                    // Verschieben starten
+                    await Task.Run(() => FolderCopierer.MoveFolder(localBilder, remoteBilder));
+                    StatusMessage.Text = "Verschieben der Fotos abgeschlossen.";
+                }
+                catch (Exception ex)
+                {
+                    StatusMessage.Text = $"Fehler: {ex.Message}";
+                }
+            }
+            else
+            {
+                StatusMessage.Text = "Remote-Ordner für Bilder nicht erreichbar.";
+            }
+
         }
 
         private string GetNextFileNumber(string directory, string filePattern)

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AForge.Video;
+using AForge.Video.DirectShow;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using AForge.Video;
-using AForge.Video.DirectShow;
 
 namespace WpfWebcamApp
 {
@@ -15,11 +16,13 @@ namespace WpfWebcamApp
         private readonly FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
         private bool isClosing = false; // Flag zum Abbruch von NewFrame
+        private readonly string BilderPath; //Pfad wird injiziert
+        private readonly string AnlagenNr;
 
-        public FotoWindow()
+        public FotoWindow(string bilderPath, string anlagenNr)
         {
             InitializeComponent();
-
+            
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             if (videoDevices.Count == 0)
@@ -31,6 +34,8 @@ namespace WpfWebcamApp
 
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += Video_NewFrame;
+            BilderPath = string.IsNullOrWhiteSpace(bilderPath) ? Environment.CurrentDirectory + "\\" : bilderPath;
+            AnlagenNr = anlagenNr;
         }
 
         private void Video_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -58,9 +63,10 @@ namespace WpfWebcamApp
                         cameraFeed.Source = bitmapImage;
                 }));
             }
-            catch
+            catch (Exception ex)
             {
                 // Fehler ignorieren oder loggen
+                MessageBox.Show($"Fehler beim Speichern: {ex.Message}", "Kamera-Fehler");
             }
         }
 
@@ -78,14 +84,53 @@ namespace WpfWebcamApp
 
         private void SavePhoto(BitmapSource bitmapSource)
         {
+            //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            //encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+
+            //string filePath = $"Foto_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
+            //using FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            //encoder.Save(fileStream);
+
+            //MessageBox.Show($"Foto gespeichert: {filePath}");
+
+
+            // --- Schritt 1: Sicheres Format erzwingen ---
+            BitmapSource safeSource = bitmapSource;
+
+            if (bitmapSource.Format != PixelFormats.Bgr24)
+            {
+                safeSource = new FormatConvertedBitmap(bitmapSource, PixelFormats.Bgr24, null, 0);
+                safeSource.Freeze(); // wichtig für Thread-Sicherheit
+            }
+
+            // --- Schritt 2: JPEG speichern ---
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+            encoder.Frames.Add(BitmapFrame.Create(safeSource));
 
-            string filePath = $"Foto_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
-            using FileStream fileStream = new FileStream(filePath, FileMode.Create);
-            encoder.Save(fileStream);
 
-            MessageBox.Show($"Foto gespeichert: {filePath}");
+            string filePath = Path.Combine(BilderPath, $"{AnlagenNr}_{DateTime.Now:yyyyMMdd_HHmmss}.jpg");
+            string directory = Path.GetDirectoryName(filePath) ?? BilderPath;
+
+            try
+            {
+                // Sicherstellen, dass der Zielordner existiert (keine Exception, wenn bereits vorhanden)
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                using FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                encoder.Save(fileStream);
+                MessageBox.Show($"Foto gespeichert: {filePath}");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show($"Keine Rechte zum Anlegen/Schreiben in '{directory}'. Bitte Pfad oder Berechtigungen prüfen.", "Kamera-Fehler");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Speichern: {ex.Message}", "Kamera-Fehler");
+            }
         }
 
         protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)

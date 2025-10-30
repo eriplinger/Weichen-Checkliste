@@ -2,4 +2,5 @@
 ArbeitsvorratPath = C:\ProgramData\Weichen\10_Arbeitsvorbereitung
 BefundlistenPath = C:\ProgramData\Weichen
 RückmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung
-SyncPath = D:\Transfer\Weichen
+SyncPath = D:\Apps\Weicheninspektion
+BilderPath = C:\ProgramData\Weichen\40_Bilder
