@@ -542,13 +542,22 @@ namespace Weichen_Checkliste
                     FileCount.Text = files.Length.ToString();
 
                 }
+                else 
+                { 
+                    FileCount.Text = "0"; 
+                }
                 if (Directory.Exists(BilderPath))
                 {
                     // Anzahl der Dateien zählen
                     var files = await Task.Run(() => Directory.GetFiles(BilderPath));
-                    FotoCount.Text = files.Length.ToString(); 
+                    FotoCount.Text = files.Length.ToString();
                 }
-            }catch (Exception)
+                else 
+                { 
+                    FotoCount.Text = "0"; 
+                }
+            }
+            catch (Exception)
             {
                 MessageBox.Show("Fehler im Ordner für die Befunde. Kein Zugriff möglich");
             }  
