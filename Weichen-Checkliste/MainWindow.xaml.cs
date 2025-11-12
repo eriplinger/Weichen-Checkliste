@@ -1,18 +1,19 @@
 ﻿
 
 using ClosedXML.Excel;
-using Microsoft.Win32;
-using System;
-using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Globalization;
-using System.Text;
 using DocumentFormat.OpenXml.CustomProperties;
 using DocumentFormat.OpenXml.Wordprocessing;
-using System.Windows.Threading;
+using Microsoft.Win32;
 using OpenCvSharp;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
 using WpfWebcamApp;
 
 namespace Weichen_Checkliste
@@ -227,7 +228,10 @@ namespace Weichen_Checkliste
             }
 
             // Füge eine neue Spalte für den Status hinzu
-            dt.Columns.Add("Status", typeof(string));
+            //dt.Columns.Add("Status", typeof(string));
+            DataColumn statusCol = new DataColumn("Status", typeof(string));
+            dt.Columns.Add(statusCol);
+            statusCol.SetOrdinal(0); // <- Verschiebt sie an die erste Position
 
             // Setze den Status für jede Zeile auf "Nicht bearbeitet"
             foreach (DataRow row in dt.Rows)
@@ -393,6 +397,7 @@ namespace Weichen_Checkliste
                         if (selectedRow != null)
                         {
                             selectedRow["Status"] = "gespeichert";
+                            
                         }
                     }
                     catch (Exception ex)
@@ -653,6 +658,51 @@ namespace Weichen_Checkliste
                 }
             }
             return (max + 1).ToString("D7");
+        }
+
+        private void FotoFolder_Click(object sender, RoutedEventArgs e)
+        {
+            string pfad = BilderPath; 
+
+            try
+            {
+                // Prüfen, ob der Ordner existiert, sonst anlegen
+                if (!Directory.Exists(pfad))
+                {
+                    Directory.CreateDirectory(pfad);
+                }
+                // Öffnet den Windows-Explorer im angegebenen Ordner
+                Process.Start("explorer.exe", pfad);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Öffnen des Ordners:\n{ex.Message}");
+            }
+        }
+
+        private void BefundeFolder_Click(object sender, RoutedEventArgs e)
+        {
+            string pfad = RückmeldungsPath; 
+
+            try
+            {
+                // Prüfen, ob der Ordner existiert, sonst anlegen
+                if (!Directory.Exists(pfad))
+                {
+                    Directory.CreateDirectory(pfad);
+                }
+                // Öffnet den Windows-Explorer im angegebenen Ordner
+                Process.Start("explorer.exe", pfad);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Öffnen des Ordners:\n{ex.Message}");
+            }
+        }
+
+        private void UpdateStatus_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateFileStatusAsync();
         }
     }
 }

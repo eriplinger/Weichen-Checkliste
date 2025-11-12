@@ -158,9 +158,20 @@
                   SelectionChanged="dataGrid_SelectionChanged"
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
-                  Grid.RowSpan="20" Grid.ColumnSpan="3"/>
+                  Grid.RowSpan="20" Grid.ColumnSpan="3">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <!-- Wenn der Zellenwert "gespeichert" ist -->
+                        <DataTrigger Binding="{Binding Path=Status}" Value="gespeichert">
+                            <Setter Property="Background" Value="LightGreen"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
 
-    <!-- Laden -->
+        <!-- Laden -->
     <Button Content="Laden" Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Click="Laden_Click"/>
 
     <!-- Speichern -->
@@ -196,18 +207,27 @@
             </StatusBarItem>
             <Separator Margin="5,0" />
             <StatusBarItem>
-                <TextBlock Text="Befunde im Ordner:" />
-            </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock Name="FileCount" Text="0" />
+                <Button Click="BefundeFolder_Click"
+            Background="Transparent"
+            BorderThickness="0"
+            Padding="0"
+            Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Befunde im Ordner: " />
+                        <TextBlock Name="FileCount" Text="0" />
+                    </StackPanel>
+                </Button>
             </StatusBarItem>
             <Separator Margin="5,0" />
             <StatusBarItem>
-                <TextBlock Text="Fotos im Ordner:" />
+                <Button Click="FotoFolder_Click" BorderThickness="0" Padding="0" Background="Transparent" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Fotos im Ordner: " />
+                        <TextBlock Name="FotoCount" Text="0" />
+                    </StackPanel>
+                </Button>
             </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock Name="FotoCount" Text="0" />
-            </StatusBarItem>
+            <Button Content="aktualisieren" Click="UpdateStatus_Click" Margin="10,0,0,0"/>
         </StatusBar>
 
 
