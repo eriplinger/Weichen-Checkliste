@@ -1,4 +1,6 @@
 # Settingsfile für Weichen-Checkliste
+# Standard ohne Startparameter: Inspektion oder Wartung
+Startmodus = Inspektion
 ArbeitsvorratPath = C:\ProgramData\Weichen\10_Arbeitsvorbereitung
 BefundlistenPath = C:\ProgramData\Weichen
 RückmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung

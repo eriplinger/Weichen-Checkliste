@@ -31,6 +31,7 @@ namespace Weichen_Checkliste
         private string RückmeldungsPath = "";
         private string WeichenwartungPath = "";
         private string WeichenwartungSyncPath = "";
+        private string startmodus = "Inspektion";
         private bool wartungssynchronisationLaeuft;
 
         private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
@@ -68,6 +69,7 @@ namespace Weichen_Checkliste
             dataTable = new DataTable();
 
             LoadSettings();
+            StartmodusAnwenden();
 
             LoadBefundliste();
 
@@ -78,6 +80,23 @@ namespace Weichen_Checkliste
             };
             aktualisierungsTimer.Tick += Timer_Tick;
             aktualisierungsTimer.Start();
+        }
+
+        private void StartmodusAnwenden()
+        {
+            try
+            {
+                var modus = StartmodusAuswahl.Bestimmen(startmodus, Environment.GetCommandLineArgs().Skip(1));
+                Bearbeiter.SelectedItem = modus == Startmodus.Wartung
+                    ? Bearbeiter.Items.OfType<ComboBoxItem>().First(item => item.Content?.ToString() == "Weichenwartung")
+                    : null;
+            }
+            catch (ArgumentException ex)
+            {
+                Bearbeiter.SelectedItem = null;
+                MessageBox.Show($"{ex.Message}\nDie Anwendung startet im Inspektionsmodus ohne vorausgewählten Bearbeiter.",
+                    "Startmodus", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void LoadBefundliste()
@@ -155,6 +174,10 @@ namespace Weichen_Checkliste
                                 this.RückmeldungsPath = value;
                                 Console.WriteLine($"RückmeldungsPath: {value}");
                             }
+                            else if (key == "Startmodus")
+                            {
+                                startmodus = value;
+                            }
                             else if (key == "WeichenwartungPath")
                             {
                                 WeichenwartungPath = value;
@@ -202,7 +225,8 @@ namespace Weichen_Checkliste
                     $"SyncPath = {SyncPath}",
                     $"BilderPath = {BilderPath}",
                     $"WeichenwartungPath = {WeichenwartungPath}",
-                    $"WeichenwartungSyncPath = {WeichenwartungSyncPath}"
+                    $"WeichenwartungSyncPath = {WeichenwartungSyncPath}",
+                    $"Startmodus = {startmodus}"
                 };
                 // Schreibe die Zeilen in die Datei
                 Directory.CreateDirectory(Path.GetDirectoryName(settingsFilePath)!);

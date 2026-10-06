@@ -1,5 +1,31 @@
 # Weichen-Checkliste
 
+## Startmodus und Verknüpfungen
+
+In `C:\ProgramData\Weichen\settings.txt` bestimmt `Startmodus = Inspektion`
+oder `Startmodus = Wartung` den Standard beim nächsten Start. Ohne Eintrag
+startet die Anwendung im Inspektionsmodus. Dort bleibt der Bearbeiter leer;
+Früh-, Spät- oder Nachtdienst wird anschließend ausgewählt. Im Wartungsmodus
+ist „Weichenwartung“ vorausgewählt. Die Bearbeiter-Auswahl bleibt änderbar.
+
+Ein Startparameter hat Vorrang vor der Settings-Datei. Für zwei Windows-
+Verknüpfungen im Feld „Ziel“ den jeweiligen vollständigen EXE-Pfad verwenden:
+
+```text
+"C:\Pfad\Weichen-Checkliste.exe" --modus=inspektion
+"C:\Pfad\Weichen-Checkliste.exe" --modus=wartung
+```
+
+Groß-/Kleinschreibung ist beim Modus egal. Ungültige oder mehrfach angegebene
+Modusparameter führen zu einer Meldung und zum Inspektionsmodus ohne Bearbeiter.
+
+Zum Testen in Visual Studio das Anwendungsprojekt als Startprojekt auswählen.
+Unter **Projekt → Eigenschaften → Debuggen → Debugstartprofile-Benutzeroberfläche
+öffnen** im Projektprofil bei **Befehlszeilenargumente** `--modus=wartung` oder
+`--modus=inspektion` eintragen und mit F5 starten. In manchen Visual-Studio-
+Versionen heißt das Feld „Anwendungsargumente“. Für den Settings-Standard das
+Argumentfeld leeren und erneut starten.
+
 ## Weichenwartung
 
 Bei Bearbeiter „Weichenwartung“ wird genau ein Excel-Befund mit dem Kommentar
