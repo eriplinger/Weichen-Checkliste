@@ -4,3 +4,7 @@ BefundlistenPath = C:\ProgramData\Weichen
 RückmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung
 SyncPath = D:\Apps\Weicheninspektion
 BilderPath = C:\ProgramData\Weichen\40_Bilder
+# Eigener lokaler Ordner für Wartungsbefunde
+WeichenwartungPath = C:\ProgramData\Weichen\30_Weichenwartung
+# Vollständiger Remote-Zielordner; leer bedeutet keine Wartungs-Synchronisation
+WeichenwartungSyncPath =

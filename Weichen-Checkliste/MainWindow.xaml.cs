@@ -29,6 +29,12 @@ namespace Weichen_Checkliste
         private string ArbeitsvorratPath = "";
         private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\";
         private string RückmeldungsPath = "";
+        private string WeichenwartungPath = "";
+        private string WeichenwartungSyncPath = "";
+        private bool wartungssynchronisationLaeuft;
+
+        private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
+        private string AktuellerBefundpfad => IstWeichenwartung ? WeichenwartungPath : RückmeldungsPath;
         private string lastSavedPhotoPath = "";
         private int bilderZaehler = 0;
         private string BilderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\40_Bilder";
@@ -149,6 +155,14 @@ namespace Weichen_Checkliste
                                 this.RückmeldungsPath = value;
                                 Console.WriteLine($"RückmeldungsPath: {value}");
                             }
+                            else if (key == "WeichenwartungPath")
+                            {
+                                WeichenwartungPath = value;
+                            }
+                            else if (key == "WeichenwartungSyncPath")
+                            {
+                                WeichenwartungSyncPath = value;
+                            }
                             else if (key == "SyncPath")
                             {
                                 this.SyncPath = value;
@@ -184,9 +198,14 @@ namespace Weichen_Checkliste
                     $"# Settingsfile für Weichen-Checkliste",
                     $"ArbeitsvorratPath = {pfad1}",
                     $"BefundlistenPath = {pfad2}",
-                    $"RückmeldungsPath = {pfad3}"
+                    $"RückmeldungsPath = {pfad3}",
+                    $"SyncPath = {SyncPath}",
+                    $"BilderPath = {BilderPath}",
+                    $"WeichenwartungPath = {WeichenwartungPath}",
+                    $"WeichenwartungSyncPath = {WeichenwartungSyncPath}"
                 };
                 // Schreibe die Zeilen in die Datei
+                Directory.CreateDirectory(Path.GetDirectoryName(settingsFilePath)!);
                 File.WriteAllLines(settingsFilePath, lines);
                 MessageBox.Show("Einstellungen wurden erfolgreich gespeichert.");
             }
@@ -379,7 +398,12 @@ namespace Weichen_Checkliste
                 {
                     string iso8601 = DateOnly.ParseExact(AktuellesDatum.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                     string ampel = "grün";
-                    if (Kommentare.Text.Equals("ohne Auffälligkeit"))
+                    if (IstWeichenwartung)
+                    {
+                        PruefeWartungspfade(false);
+                        SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, "Wartung durchgeführt", WeichenwartungPath);
+                    }
+                    else if (Kommentare.Text.Equals("ohne Auffälligkeit"))
                     {
                         SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, Kommentare.Text);
                     }
@@ -407,48 +431,60 @@ namespace Weichen_Checkliste
                 }
                 catch (Exception ex)
                 {
-                    //Todo
+                    MessageBox.Show($"Fehler beim Speichern: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         // Funktion zum Speichern in Excel
-        private void SaveToExcel(string Weichennummer, string Datum, string Bearbeiter, string Status, string Kommentare)
+        private void SaveToExcel(string Weichennummer, string Datum, string Bearbeiter, string Status, string Kommentare, string? zielordner = null)
         {
+            BefundDateien.Speichern(zielordner ?? RückmeldungsPath, Weichennummer, Datum, Bearbeiter, Status, Kommentare);
+            MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void PruefeWartungspfade(bool mitRemote)
+        {
+            var anderePfade = new List<string> { RückmeldungsPath, BilderPath, ArbeitsvorratPath };
+            if (!string.IsNullOrWhiteSpace(SyncPath))
+            {
+                anderePfade.Add(Path.Combine(SyncPath, "20_Arbeitsnachbereitung"));
+                anderePfade.Add(Path.Combine(SyncPath, "40_Bilder"));
+                anderePfade.Add(Path.Combine(SyncPath, "10_Arbeitsvorbereitung"));
+            }
+            BefundDateien.PruefeGetrenntenPfad(WeichenwartungPath, anderePfade.ToArray());
+            if (mitRemote)
+            {
+                anderePfade.Add(WeichenwartungPath);
+                BefundDateien.PruefeGetrenntenPfad(WeichenwartungSyncPath, anderePfade.ToArray());
+            }
+        }
+
+        private async Task SynchronisiereWeichenwartungAsync()
+        {
+            if (wartungssynchronisationLaeuft) return;
+            if (string.IsNullOrWhiteSpace(WeichenwartungSyncPath))
+            {
+                WartungStatus.Text = "Wartung: Sync deaktiviert";
+                WartungStatus.ToolTip = "WeichenwartungSyncPath in settings.txt hinterlegen.";
+                return;
+            }
+            wartungssynchronisationLaeuft = true;
             try
             {
-                // Neues Excel-Workbook und Worksheet erstellen
-                using (var workbook = new XLWorkbook())
-                {
-                    var worksheet = workbook.Worksheets.Add(Weichennummer + "_" + Datum);
-
-                    // Daten in die Zellen schreiben
-                    worksheet.Cell(1, 1).Value = "Datum";
-                    worksheet.Cell(1, 2).Value = "Bearbeiter";
-                    worksheet.Cell(1, 3).Value = "Status";
-                    worksheet.Cell(1, 4).Value = "Kommentare";
-
-                    worksheet.Cell(2, 1).Value = Datum;
-                    worksheet.Cell(2, 2).Value = Bearbeiter;
-                    worksheet.Cell(2, 3).Value = Status;
-                    worksheet.Cell(2, 4).Value = Kommentare;
-
-                    // Excel-Datei speichern
-                    string filePath = this.RückmeldungsPath + "\\" + Weichennummer + "_" + Datum + ".xlsx";
-                    int i = 1;
-                    while (File.Exists(filePath))
-                    {
-                        filePath = this.RückmeldungsPath + "\\" + Weichennummer + "_" + Datum + "_" + i + ".xlsx";
-                        i++;
-                    }
-                    workbook.SaveAs(filePath);
-                }
-
-                MessageBox.Show("Eingaben wurden als Excel gespeichert.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+                PruefeWartungspfade(true);
+                await Task.Run(() => BefundDateien.Synchronisieren(WeichenwartungPath, WeichenwartungSyncPath));
+                WartungStatus.Text = "Wartung: synchronisiert";
+                WartungStatus.ToolTip = null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Speichern der Excel-Datei: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                WartungStatus.Text = "Wartung: nicht synchronisiert";
+                WartungStatus.ToolTip = ex.Message;
+            }
+            finally
+            {
+                wartungssynchronisationLaeuft = false;
             }
         }
 
@@ -517,6 +553,8 @@ namespace Weichen_Checkliste
 
         private async Task UpdateFileStatusAsync()
         {
+            // Unabhängig vom Inspektions-Remote und vom ausgewählten Bearbeiter.
+            await SynchronisiereWeichenwartungAsync();
             try
             {
                 if (Directory.Exists(SyncPath))
@@ -539,11 +577,12 @@ namespace Weichen_Checkliste
 
             try
             {
-                if (Directory.Exists(RückmeldungsPath))
+                string befundpfad = AktuellerBefundpfad;
+                if (Directory.Exists(befundpfad))
                 {
 
                     // Anzahl der Dateien zählen
-                    var files = await Task.Run(() => Directory.GetFiles(RückmeldungsPath));
+                    var files = await Task.Run(() => Directory.GetFiles(befundpfad));
                     FileCount.Text = files.Length.ToString();
 
                 }
@@ -682,7 +721,7 @@ namespace Weichen_Checkliste
 
         private void BefundeFolder_Click(object sender, RoutedEventArgs e)
         {
-            string pfad = RückmeldungsPath; 
+            string pfad = AktuellerBefundpfad;
 
             try
             {
