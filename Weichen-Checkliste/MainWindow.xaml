@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:Weichen_Checkliste"
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
+    <Window.Resources>
+        <Style x:Key="AusblendenBeiWeichenwartung" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=Bearbeiter}" Value="Weichenwartung">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Margin="10">
 
         <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
@@ -179,10 +188,10 @@
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
     
     <!-- Foto -->
-        <Button Content="Foto" Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Click="Foto_Click"/>
+        <Button Content="Foto" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Click="Foto_Click"/>
 
         <!-- Befund hinzufügen -->
-        <Button Content="Befund hinzufügen" Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Click="BefundNeu_Click"/>
+        <Button Content="Befund hinzufügen" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Click="BefundNeu_Click"/>
     
     <!-- Einstellungen -->
     <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Background="white">
