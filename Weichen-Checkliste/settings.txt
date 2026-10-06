@@ -1,6 +1,12 @@
 # Settingsfile für Weichen-Checkliste
+# Standard ohne Startparameter: Inspektion oder Wartung
+Startmodus = Inspektion
 ArbeitsvorratPath = C:\ProgramData\Weichen\10_Arbeitsvorbereitung
 BefundlistenPath = C:\ProgramData\Weichen
 RückmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung
-SyncPath = D:\Apps\Weicheninspektion
+SyncPath = U:\Apps\Weicheninspektion
 BilderPath = C:\ProgramData\Weichen\40_Bilder
+# Eigener lokaler Ordner für Wartungsbefunde
+WeichenwartungPath = C:\ProgramData\Weichen\50_Weichenwartung
+# Vollständiger Remote-Zielordner; leer bedeutet keine Wartungs-Synchronisation
+WeichenwartungSyncPath = U:\Apps\Weichenwartung

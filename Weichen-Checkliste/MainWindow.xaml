@@ -6,6 +6,23 @@
         xmlns:local="clr-namespace:Weichen_Checkliste"
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
+    <Window.Resources>
+        <Style x:Key="ZeileAusblendenBeiWeichenwartung" TargetType="RowDefinition">
+            <Setter Property="Height" Value="30" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=Bearbeiter}" Value="Weichenwartung">
+                    <Setter Property="Height" Value="0" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AusblendenBeiWeichenwartung" TargetType="Control">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=Bearbeiter}" Value="Weichenwartung">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Margin="10">
 
         <!-- Grid Definition: Drei Spalten und mehrere Zeilen für die Felder -->
@@ -21,7 +38,7 @@
             <!--Datum-->
             <RowDefinition Height="30" />
             <!--Nummern-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Art-->
             <RowDefinition Height="30" />
             <!--Ort-->
@@ -29,13 +46,13 @@
             <!--Historie-->
             <RowDefinition Height="30" />
             <!--Gleis-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Status-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar1-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar2-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar3-->
             <RowDefinition Height="30" />
             <!--Kommentar4-->
@@ -98,6 +115,7 @@
             <ComboBoxItem Content="Frühdienst" />
             <ComboBoxItem Content="Spätdienst" />
             <ComboBoxItem Content="Nachtdienst" />
+            <ComboBoxItem Content="Weichenwartung" />
         </ComboBox>
 
         <!-- Anlagennr -->
@@ -109,44 +127,44 @@
         <TextBox Name="SAPNr" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Art -->
-        <Label Content="Art:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
-        <TextBox Name="Art" Grid.Row="2" Grid.Column="0" Margin="120,0,0,0" />
+        <Label Content="Art:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Art" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="2" Grid.Column="0" Margin="120,0,0,0" />
 
         <!-- Typ -->
-        <Label Content="Typ:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Typ" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0" />
+        <Label Content="Typ:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Typ" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Einbauort -->
         <Label Content="Einbauort:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
         <TextBox Name="Einbauort" Grid.Row="3" Grid.Column="0" Margin="120,0,0,0" Grid.ColumnSpan="2"/>
 
         <!-- Einbau Ur-Weiche -->
-        <Label Content="Einbau Ur-Weiche:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
-        <TextBox Name="EinbauUrWeiche" Grid.Row="4" Grid.Column="0" Margin="120,0,0,0" />
+        <Label Content="Einbau Ur-Weiche:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="EinbauUrWeiche" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="4" Grid.Column="0" Margin="120,0,0,0" />
 
         <!-- Erneuerung -->
-        <Label Content="Erneuerung:" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Erneuerung" Grid.Row="4" Grid.Column="1" Margin="120,0,0,0" />
+        <Label Content="Erneuerung:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Erneuerung" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="4" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Stammgleis -->
-        <Label Content="Stammgleis:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
-        <TextBox Name="Stammgleis" Grid.Row="5" Grid.Column="0" Margin="120,0,0,0" />
+        <Label Content="Stammgleis:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="Stammgleis" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="5" Grid.Column="0" Margin="120,0,0,0" />
 
         <!-- Zweiggleis -->
-        <Label Content="Zweiggleis:" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="Zweiggleis" Grid.Row="5" Grid.Column="1" Margin="120,0,0,0" />
+        <Label Content="Zweiggleis:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="Zweiggleis" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="5" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- LETZTE_INSTANDHALTUNG -->
-        <Label Content="Letzte Instandhaltung:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
-        <TextBox Name="LetzteInstandhaltung" Grid.Row="6" Grid.Column="0" Margin="120,0,0,0" />
+        <Label Content="Letzte Instandhaltung:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Name="LetzteInstandhaltung" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="0" Margin="120,0,0,0" />
 
         <!-- GW201_ID1 -->
-        <Label Content="GW201_ID1:" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
-        <TextBox Name="GW201_ID1" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
+        <Label Content="GW201_ID1:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Name="GW201_ID1" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="1" Margin="120,0,0,0" />
 
         <!-- Kommentare -->
-        <Label Content="Kommentare:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" />
-        <TextBox Name="Kommentare" Grid.Row="7" Grid.Column="0" Margin="120,0,0,0" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="5" Grid.ColumnSpan="2" />
+        <Label Content="Kommentare:" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" />
+        <TextBox Name="Kommentare" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="7" Grid.Column="0" Margin="120,0,0,0" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="5" Grid.ColumnSpan="2" />
 
         <!-- Arbeitsvorrat -->
         <DataGrid Name="Arbeitsvorrat" 
@@ -178,10 +196,10 @@
     <Button Content="Speichern" Grid.Row="10" Grid.Column="3" Grid.RowSpan="2" Click="Speichern_Click"/>
     
     <!-- Foto -->
-        <Button Content="Foto" Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Click="Foto_Click"/>
+        <Button Content="Foto" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Click="Foto_Click"/>
 
         <!-- Befund hinzufügen -->
-        <Button Content="Befund hinzufügen" Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Click="BefundNeu_Click"/>
+        <Button Content="Befund hinzufügen" Style="{StaticResource AusblendenBeiWeichenwartung}" Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Click="BefundNeu_Click"/>
     
     <!-- Einstellungen -->
     <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Background="white">
@@ -226,6 +244,9 @@
                         <TextBlock Name="FotoCount" Text="0" />
                     </StackPanel>
                 </Button>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="WartungStatus" Text="Wartung: noch nicht synchronisiert" />
             </StatusBarItem>
             <Button Content="aktualisieren" Click="UpdateStatus_Click" Margin="10,0,0,0"/>
         </StatusBar>
