@@ -98,6 +98,7 @@
             <ComboBoxItem Content="Frühdienst" />
             <ComboBoxItem Content="Spätdienst" />
             <ComboBoxItem Content="Nachtdienst" />
+            <ComboBoxItem Content="Weichenwartung" />
         </ComboBox>
 
         <!-- Anlagennr -->
