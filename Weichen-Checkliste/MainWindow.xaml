@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="SSB Weichen-Checkliste" Height="600" Width="800">
     <Window.Resources>
+        <Style x:Key="ZeileAusblendenBeiWeichenwartung" TargetType="RowDefinition">
+            <Setter Property="Height" Value="30" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=Bearbeiter}" Value="Weichenwartung">
+                    <Setter Property="Height" Value="0" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="AusblendenBeiWeichenwartung" TargetType="Control">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=Bearbeiter}" Value="Weichenwartung">
@@ -30,7 +38,7 @@
             <!--Datum-->
             <RowDefinition Height="30" />
             <!--Nummern-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Art-->
             <RowDefinition Height="30" />
             <!--Ort-->
@@ -38,13 +46,13 @@
             <!--Historie-->
             <RowDefinition Height="30" />
             <!--Gleis-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Status-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar1-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar2-->
-            <RowDefinition Height="30" />
+            <RowDefinition Style="{StaticResource ZeileAusblendenBeiWeichenwartung}" />
             <!--Kommentar3-->
             <RowDefinition Height="30" />
             <!--Kommentar4-->
