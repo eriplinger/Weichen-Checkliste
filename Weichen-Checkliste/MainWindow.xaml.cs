@@ -251,7 +251,9 @@ namespace Weichen_Checkliste
             DataTable dt = new DataTable();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
+            openFileDialog.Filter = "CSV und Excel (*.csv;*.xlsx)|*.csv;*.xlsx|" +
+                "CSV (*.csv)|*.csv|" +
+                "Excel (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = IstWeichenwartung ? WeichenwartungArbeitsvorratPath : ArbeitsvorratPath;
 
             if (openFileDialog.ShowDialog() != true) return;
