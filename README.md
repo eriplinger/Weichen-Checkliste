@@ -1,5 +1,25 @@
 # Weichen-Checkliste
 
+## Zeichenkodierung beim Laden
+
+CSV-Dateien mit Unicode-BOM werden entsprechend ihrer BOM gelesen. Ohne BOM
+wird zunächst striktes UTF-8 geprüft; sind die Bytes kein gültiges UTF-8, wird
+zwischen Windows-1252 (ANSI auf deutschen Windows-Systemen), IBM850 und IBM437
+gewählt. Eine Sprachheuristik bewertet deutsche Umlaute, Steuerzeichen,
+untypische Buchstaben und DOS-Rahmenzeichen. Bei schwacher Evidenz bleibt
+Windows-1252 der Standard; IBM850 hat bei gleicher DOS-Bewertung Vorrang.
+Eine ungültige Unicode-Datei mit BOM wird mit einer Fehlermeldung abgelehnt.
+Die Anzeige verwendet anschließend Unicode. Es gibt keine Regex, Wortersetzung
+oder Änderung der Quelldatei und keine zusätzliche Einstellung.
+
+XLSX enthält bereits Unicode und wird weiterhin mit ClosedXML gelesen.
+Bereits falsch gespeicherte Zeichen sind keine abweichende Dateikodierung und
+werden nicht ersetzt. „ANSI“ ist kein weltweit einheitlicher Zeichensatz;
+Die Unterscheidung zwischen Windows-1252 und DOS-Codepages ist eine Schätzung,
+besonders bei kurzen Texten oder fremdsprachigen Namen. Andere lokale Windows-
+Codepages werden nicht unterstützt. Ebenso sind manche Bytefolgen ohne BOM sowohl
+gültiges UTF-8 als auch gültiges Windows-1252; in diesem Fall hat UTF-8 Vorrang.
+
 ## Startmodus und Verknüpfungen
 
 In `C:\ProgramData\Weichen\settings.txt` bestimmt `Startmodus = Inspektion`
