@@ -245,6 +245,7 @@
                     </StackPanel>
                 </Button>
             </StatusBarItem>
+            <Separator Margin="5,0" />
             <StatusBarItem>
                 <TextBlock Name="WartungStatus" Text="Wartung: noch nicht synchronisiert" />
             </StatusBarItem>
