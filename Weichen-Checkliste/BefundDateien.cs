@@ -49,6 +49,18 @@ namespace Weichen_Checkliste
             }
         }
 
+        public static void ArbeitsvorratKopieren(string remote, string lokal)
+        {
+            PruefeGetrenntenPfad(lokal, remote);
+            if (!Directory.Exists(remote))
+                throw new IOException("Remote-Arbeitsvorrat für Weichenwartung nicht erreichbar.");
+            Directory.CreateDirectory(lokal);
+            foreach (string quelle in Directory.GetFiles(remote))
+                File.Copy(quelle, Path.Combine(lokal, Path.GetFileName(quelle)), true);
+            foreach (string ordner in Directory.GetDirectories(remote))
+                ArbeitsvorratKopieren(ordner, Path.Combine(lokal, Path.GetFileName(ordner)));
+        }
+
         public static void Synchronisieren(string lokal, string remote)
         {
             PruefeGetrenntenPfad(remote, lokal);

@@ -29,13 +29,14 @@ namespace Weichen_Checkliste
         private string ArbeitsvorratPath = "";
         private string BefundlistenPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\";
         private string RückmeldungsPath = "";
-        private string WeichenwartungPath = "";
+        private string WeichenwartungRückmeldungsPath = "";
+        private string WeichenwartungArbeitsvorratPath = "";
         private string WeichenwartungSyncPath = "";
         private string startmodus = "Inspektion";
         private bool wartungssynchronisationLaeuft;
 
         private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
-        private string AktuellerBefundpfad => IstWeichenwartung ? WeichenwartungPath : RückmeldungsPath;
+        private string AktuellerBefundpfad => IstWeichenwartung ? WeichenwartungRückmeldungsPath : RückmeldungsPath;
         private string lastSavedPhotoPath = "";
         private int bilderZaehler = 0;
         private string BilderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Weichen\40_Bilder";
@@ -178,9 +179,13 @@ namespace Weichen_Checkliste
                             {
                                 startmodus = value;
                             }
-                            else if (key == "WeichenwartungPath")
+                            else if (key == "WeichenwartungArbeitsvorratPath")
                             {
-                                WeichenwartungPath = value;
+                                WeichenwartungArbeitsvorratPath = value;
+                            }
+                            else if (key == "WeichenwartungRückmeldungsPath" || key == "WeichenwartungRÃ¼ckmeldungsPath")
+                            {
+                                WeichenwartungRückmeldungsPath = value;
                             }
                             else if (key == "WeichenwartungSyncPath")
                             {
@@ -224,7 +229,8 @@ namespace Weichen_Checkliste
                     $"RückmeldungsPath = {pfad3}",
                     $"SyncPath = {SyncPath}",
                     $"BilderPath = {BilderPath}",
-                    $"WeichenwartungPath = {WeichenwartungPath}",
+                    $"WeichenwartungArbeitsvorratPath = {WeichenwartungArbeitsvorratPath}",
+                    $"WeichenwartungRückmeldungsPath = {WeichenwartungRückmeldungsPath}",
                     $"WeichenwartungSyncPath = {WeichenwartungSyncPath}",
                     $"Startmodus = {startmodus}"
                 };
@@ -246,7 +252,7 @@ namespace Weichen_Checkliste
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
-            openFileDialog.InitialDirectory = ArbeitsvorratPath;
+            openFileDialog.InitialDirectory = IstWeichenwartung ? WeichenwartungArbeitsvorratPath : ArbeitsvorratPath;
 
             if (openFileDialog.ShowDialog() != true) return;
 
@@ -425,7 +431,7 @@ namespace Weichen_Checkliste
                     if (IstWeichenwartung)
                     {
                         PruefeWartungspfade(false);
-                        SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, "Wartung durchgeführt", WeichenwartungPath);
+                        SaveToExcel(Anlagennr.Text, iso8601, Bearbeiter.Text, ampel, "Wartung durchgeführt", WeichenwartungRückmeldungsPath);
                     }
                     else if (Kommentare.Text.Equals("ohne Auffälligkeit"))
                     {
@@ -476,11 +482,18 @@ namespace Weichen_Checkliste
                 anderePfade.Add(Path.Combine(SyncPath, "40_Bilder"));
                 anderePfade.Add(Path.Combine(SyncPath, "10_Arbeitsvorbereitung"));
             }
-            BefundDateien.PruefeGetrenntenPfad(WeichenwartungPath, anderePfade.ToArray());
+            BefundDateien.PruefeGetrenntenPfad(WeichenwartungRückmeldungsPath, anderePfade.ToArray());
+            if (!string.IsNullOrWhiteSpace(WeichenwartungArbeitsvorratPath))
+            {
+                BefundDateien.PruefeGetrenntenPfad(WeichenwartungArbeitsvorratPath, anderePfade.ToArray());
+                BefundDateien.PruefeGetrenntenPfad(WeichenwartungArbeitsvorratPath, WeichenwartungRückmeldungsPath);
+            }
             if (mitRemote)
             {
-                anderePfade.Add(WeichenwartungPath);
+                anderePfade.Add(WeichenwartungRückmeldungsPath);
+                anderePfade.Add(WeichenwartungArbeitsvorratPath);
                 BefundDateien.PruefeGetrenntenPfad(WeichenwartungSyncPath, anderePfade.ToArray());
+                BefundDateien.PruefeGetrenntenPfad(WeichenwartungArbeitsvorratPath, WeichenwartungSyncPath);
             }
         }
 
@@ -497,9 +510,21 @@ namespace Weichen_Checkliste
             try
             {
                 PruefeWartungspfade(true);
-                await Task.Run(() => BefundDateien.Synchronisieren(WeichenwartungPath, WeichenwartungSyncPath));
-                WartungStatus.Text = "Wartung: synchronisiert";
-                WartungStatus.ToolTip = null;
+                var fehler = new List<string>();
+                try
+                {
+                    string remoteAV = Path.Combine(WeichenwartungSyncPath, "50_WeichenwartungAV");
+                    await Task.Run(() => BefundDateien.ArbeitsvorratKopieren(remoteAV, WeichenwartungArbeitsvorratPath));
+                }
+                catch (Exception ex) { fehler.Add(ex.Message); }
+                try
+                {
+                    string remoteR = Path.Combine(WeichenwartungSyncPath, "60_WeichenwartungR");
+                    await Task.Run(() => BefundDateien.Synchronisieren(WeichenwartungRückmeldungsPath, remoteR));
+                }
+                catch (Exception ex) { fehler.Add(ex.Message); }
+                WartungStatus.Text = fehler.Count == 0 ? "Wartung: synchronisiert" : "Wartung: Sync unvollständig";
+                WartungStatus.ToolTip = fehler.Count == 0 ? null : string.Join("\n", fehler);
             }
             catch (Exception ex)
             {
@@ -577,8 +602,8 @@ namespace Weichen_Checkliste
 
         private async Task UpdateFileStatusAsync()
         {
-            // Unabhängig vom Inspektions-Remote und vom ausgewählten Bearbeiter.
-            await SynchronisiereWeichenwartungAsync();
+            // Wartungsordner nur im Wartungsmodus synchronisieren.
+            if (IstWeichenwartung) await SynchronisiereWeichenwartungAsync();
             try
             {
                 if (Directory.Exists(SyncPath))
