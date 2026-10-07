@@ -56,24 +56,39 @@ In der tatsächlich verwendeten Datei `C:\ProgramData\Weichen\settings.txt`
 die folgenden Einträge ergänzen und die Anwendung neu starten:
 
 ```text
-WeichenwartungPath = C:\ProgramData\Weichen\30_Weichenwartung
+WeichenwartungArbeitsvorratPath = C:\ProgramData\Weichen\50_WeichenwartungAV
+WeichenwartungRückmeldungsPath = C:\ProgramData\Weichen\60_WeichenwartungR
 WeichenwartungSyncPath = \\server\freigabe\Weichenwartung
 ```
 
-Der erste Pfad ist der lokale Speicherordner und wird beim Speichern angelegt.
-Der zweite ist der vollständige Remote-Zielordner und muss bereits erreichbar
-sein. Beide Pfade müssen absolute, getrennte Ordner sein und dürfen sich nicht
-mit den bisherigen Befund-, Bilder- oder Arbeitsordnern überschneiden.
-Bestehende Einstellungsdateien werden nicht automatisch ergänzt.
+`WeichenwartungArbeitsvorratPath` ist der lokale Wartungs-Arbeitsvorrat;
+„Laden“ öffnet diesen Ordner nur im Wartungsmodus.
+`WeichenwartungRückmeldungsPath` ist der lokale Speicherordner für Wartungsbefunde
+und wird beim Speichern angelegt. `WeichenwartungSyncPath` ist jetzt der
+Remote-Basisordner mit den Unterordnern `50_WeichenwartungAV` und
+`60_WeichenwartungR`. Beide Remote-Unterordner müssen bereits existieren.
+Alle Pfade müssen absolut sein und von den Inspektionsordnern getrennt bleiben.
 
-Alle 60 Sekunden sowie über „aktualisieren“ werden lokale Wartungs-Exceldateien
-in den eigenen Remote-Ordner verschoben, unabhängig vom ausgewählten Bearbeiter
-und vom bisherigen Inspektions-Remote. Bereits vorhandene Remote-Dateien bleiben
-erhalten; bei gleichen Namen erhält die neue Datei einen nummerierten Namen.
-Bei fehlender Verbindung bleiben die Dateien lokal bis zum nächsten Versuch.
-Ein leerer `WeichenwartungSyncPath` deaktiviert nur die Wartungs-Synchronisation.
-Der Wartungsstatus wird separat in der Statusleiste angezeigt; Fehlerdetails
-stehen im Tooltip. „Befunde im Ordner“ öffnet im Wartungsmodus den Wartungsordner.
+Alle 60 Sekunden sowie über „aktualisieren“ wird der Wartungs-Arbeitsvorrat aus
+`WeichenwartungSyncPath\50_WeichenwartungAV` lokal kopiert (mit Aktualisierung
+vorhandener Dateien). Lokale Wartungs-Rückmeldungen werden separat nach
+`WeichenwartungSyncPath\60_WeichenwartungR` verschoben. Vorhandene Remote-Befunde
+bleiben erhalten; gleiche Namen erhalten einen nummerierten Zusatz. Scheitert
+eine Richtung, wird die andere trotzdem versucht. Offline bleiben lokale
+Dateien erhalten. Ein leerer `WeichenwartungSyncPath` deaktiviert die Wartungs-
+Synchronisation. Sie läuft nur bei ausgewähltem Bearbeiter „Weichenwartung“.
+
+Befundzähler und „Befunde im Ordner“ verwenden nur im Wartungsmodus den Wartungs-
+Rückmeldungsordner. Inspektionspfade und Inspektions-Synchronisation bleiben
+unverändert. Der Wartungsstatus steht separat in der Statusleiste; Fehlerdetails
+stehen im Tooltip.
+
+Bestehende `settings.txt` werden nicht automatisch geändert. Den bisherigen
+`WeichenwartungPath` durch die beiden neuen lokalen Pfade ersetzen und die
+Anwendung neu starten. Bereits gespeicherte Wartungsbefunde bei geschlossener
+Anwendung in den neuen lokalen Rückmeldungsordner verschieben, damit sie weiter
+synchronisiert werden. Auch vorhandene Remote-Wartungsbefunde gehören in den
+neuen Remote-Unterordner `60_WeichenwartungR`.
 
 Attribution
 <a href="https://www.flaticon.com/free-icons/train" title="train icons">Train icons created by Aranagraphics - Flaticon</a>
