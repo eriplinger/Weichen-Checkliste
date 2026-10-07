@@ -1,6 +1,8 @@
 # Settingsfile für Weichen-Checkliste
 # Standard ohne Startparameter: Inspektion oder Wartung
 Startmodus = Inspektion
+# CSV-Quellzeichensatz: Auto (UTF-8/Windows-1252), UTF8, Windows1252 oder IBM850
+CsvEncoding = Auto
 ArbeitsvorratPath = C:\ProgramData\Weichen\10_Arbeitsvorbereitung
 BefundlistenPath = C:\ProgramData\Weichen
 RückmeldungsPath = C:\ProgramData\Weichen\20_Arbeitsnachbereitung

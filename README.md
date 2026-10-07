@@ -1,5 +1,30 @@
 # Weichen-Checkliste
 
+## CSV- und Excel-Import
+
+In `C:\ProgramData\Weichen\settings.txt` kann der CSV-Quellzeichensatz mit
+`CsvEncoding = Auto` eingestellt werden. Auto erkennt UTF-8 und verwendet bei
+nicht gültigem UTF-8 Windows-1252. Unicode-Dateien mit UTF-8-, UTF-16- oder
+UTF-32-BOM werden anhand ihrer BOM erkannt. Die Kodierung wird auf die komplette
+Datei angewendet; es gibt keine wortbezogenen Zeichenersetzungen.
+
+Bei eindeutig bekanntem Quellzeichensatz sind auch `CsvEncoding = UTF8`,
+`CsvEncoding = Windows1252` und `CsvEncoding = IBM850` möglich. Danach die
+Anwendung neu starten. IBM850 ist für alte DOS-Exporte gedacht, bei denen z.B.
+„ß“ beim Lesen als Windows-1252 zu „á“ wird. Windows-1252 und DOS-Kodierungen
+lassen sich ohne Metadaten nicht zuverlässig unterscheiden; Auto errät keine
+DOS-Kodierung. Die Quelldateien bleiben unverändert.
+
+CSV-Anführungszeichen, Semikolons in zitierten Feldern und mehrzeilige Felder
+werden unterstützt. XLSX speichert bereits Unicode und verwendet die CSV-
+Einstellung nicht. Bei CSV-Feldern und Excel-Zelltexten werden bereits falsch
+als Windows-1252 interpretierte UTF-8-Daten nur dann zurückgewandelt, wenn dies
+für den ganzen Text verlustfrei möglich ist. Bereits verlorene Zeichen (etwa
+„�“) lassen sich nicht rekonstruieren: Die Datei wird mit einer Fehlermeldung
+abgelehnt, und die bisherige Liste bleibt erhalten. Ein gültiges „á“ in einer
+XLSX-Datei kann nicht automatisch von einem früher beschädigten „ß“ unterschieden
+werden. Leere Excel-Zellen behalten ihre Spaltenposition.
+
 ## Startmodus und Verknüpfungen
 
 In `C:\ProgramData\Weichen\settings.txt` bestimmt `Startmodus = Inspektion`

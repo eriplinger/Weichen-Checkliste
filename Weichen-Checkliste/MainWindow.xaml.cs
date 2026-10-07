@@ -32,6 +32,7 @@ namespace Weichen_Checkliste
         private string WeichenwartungPath = "";
         private string WeichenwartungSyncPath = "";
         private string startmodus = "Inspektion";
+        private string csvEncoding = "Auto";
         private bool wartungssynchronisationLaeuft;
 
         private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
@@ -174,6 +175,10 @@ namespace Weichen_Checkliste
                                 this.RückmeldungsPath = value;
                                 Console.WriteLine($"RückmeldungsPath: {value}");
                             }
+                            else if (key == "CsvEncoding")
+                            {
+                                csvEncoding = value;
+                            }
                             else if (key == "Startmodus")
                             {
                                 startmodus = value;
@@ -226,7 +231,8 @@ namespace Weichen_Checkliste
                     $"BilderPath = {BilderPath}",
                     $"WeichenwartungPath = {WeichenwartungPath}",
                     $"WeichenwartungSyncPath = {WeichenwartungSyncPath}",
-                    $"Startmodus = {startmodus}"
+                    $"Startmodus = {startmodus}",
+                    $"CsvEncoding = {csvEncoding}"
                 };
                 // Schreibe die Zeilen in die Datei
                 Directory.CreateDirectory(Path.GetDirectoryName(settingsFilePath)!);
@@ -242,130 +248,40 @@ namespace Weichen_Checkliste
         // Event-Handler für den "Laden"-Button
         private void Laden_Click(object sender, RoutedEventArgs e)
         {
-            DataTable dt = new DataTable();
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
-            openFileDialog.InitialDirectory = ArbeitsvorratPath;
-
-            if (openFileDialog.ShowDialog() == true)
+            var dialog = new OpenFileDialog
             {
-                string filePath = openFileDialog.FileName;
-                string extension = Path.GetExtension(filePath).ToLower();
+                Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx",
+                InitialDirectory = ArbeitsvorratPath
+            };
+            if (dialog.ShowDialog() != true) return;
 
-                // Unterscheidung zwischen CSV und Excel basierend auf der Dateiendung
-                if (extension == ".csv")
-                {
-                    dt = LoadCsv(filePath);
-                }
-                else if (extension == ".xlsx")
-                {
-                    dt = LoadExcel(filePath);
-                }
-            }
-
-            if (dt == null)
+            try
             {
-                MessageBox.Show($"Fehler beim Laden der Datei: ", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;           
-            }
-
-            // Füge eine neue Spalte für den Status hinzu
-            //dt.Columns.Add("Status", typeof(string));
-            DataColumn statusCol = new DataColumn("Status", typeof(string));
-            dt.Columns.Add(statusCol);
-            statusCol.SetOrdinal(0); // <- Verschiebt sie an die erste Position
-
-            // Setze den Status für jede Zeile auf "Nicht bearbeitet"
-            foreach (DataRow row in dt.Rows)
-            {
-                row["Status"] = "Nicht bearbeitet";
-            }
-
-            // DataGrid mit der DataTable füllen
-            Arbeitsvorrat.ItemsSource = dt.DefaultView;
-        }
-
-        // Funktion zum Laden der CSV-Datei
-        private DataTable LoadCsv(string filePath)
-        {
-            // Registrierung von zusätzlichen Encodings, falls nötig (z.B. für Windows-1252)
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            DataTable dt = new DataTable();
-            string[] lines = File.ReadAllLines(filePath, Encoding.GetEncoding("Windows-1252"));
-
-            if (lines.Length > 0)
-            {
-                // Erste Zeile enthält die Spaltenüberschriften
-                string[] headers = lines[0].Split(';');
-
-                foreach (string header in headers)
+                string extension = Path.GetExtension(dialog.FileName).ToLowerInvariant();
+                DataTable dt = extension switch
                 {
-                    dt.Columns.Add(new DataColumn(header));
-                }
+                    ".csv" => ArbeitsvorratImport.CsvLaden(dialog.FileName, csvEncoding),
+                    ".xlsx" => ArbeitsvorratImport.ExcelLaden(dialog.FileName),
+                    _ => throw new InvalidDataException("Bitte eine CSV- oder XLSX-Datei auswählen.")
+                };
+                string[] pflichtspalten = { "Art", "Typ", "Anlagennr", "SAP-Nr.", "Einbauort",
+                    "Einbau Ur-Weiche", "Erneuerung", "Stammgleis", "Zweiggleis" };
+                var fehlend = pflichtspalten.Where(name => !dt.Columns.Contains(name)).ToArray();
+                if (fehlend.Length > 0)
+                    throw new InvalidDataException("Fehlende Spalten: " + string.Join(", ", fehlend));
 
-                // Datenzeilen ab der zweiten Zeile hinzufügen
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] rowData = lines[i].Split(';');
-                    dt.Rows.Add(rowData);
-                }
-
-                return dt;
+                DataColumn statusCol = dt.Columns.Contains("Status")
+                    ? dt.Columns["Status"]! : dt.Columns.Add("Status", typeof(string));
+                statusCol.SetOrdinal(0);
+                foreach (DataRow row in dt.Rows) row["Status"] = "Nicht bearbeitet";
+                // Erst nach vollständiger Prüfung die bisherige Liste ersetzen.
+                Arbeitsvorrat.ItemsSource = dt.DefaultView;
             }
-            return null;
-        }
-
-
-        // Funktion zum Laden der Excel-Datei mit ClosedXML
-        private DataTable LoadExcel(string filePath)
-        {
-            DataTable dt = new DataTable();
-
-            // Excel-Datei mit ClosedXML öffnen
-            using (var workbook = new XLWorkbook(filePath))
+            catch (Exception ex)
             {
-                // Nimm das erste Arbeitsblatt
-                var worksheet = workbook.Worksheets.FirstOrDefault();
-
-                if (worksheet != null)
-                {
-                    bool headerRow = true;
-
-                    // Durch alle Zeilen und Spalten des Arbeitsblatts iterieren
-                    foreach (var row in worksheet.RowsUsed())
-                    {
-                        if (headerRow)
-                        {
-                            // Füge die Spaltenüberschriften aus der ersten Zeile hinzu
-                            foreach (var cell in row.CellsUsed())
-                            {
-                                dt.Columns.Add(cell.Value.ToString());
-                            }
-                            headerRow = false;
-                        }
-                        else
-                        {
-                            // Füge die Datenzeilen hinzu
-                            DataRow dataRow = dt.NewRow();
-                            int cellIndex = 0;
-
-                            foreach (var cell in row.CellsUsed())
-                            {
-                                dataRow[cellIndex] = cell.Value.ToString();
-                                cellIndex++;
-                            }
-
-                            dt.Rows.Add(dataRow);
-                        }
-                    }
-
-                    return dt;
-
-                }
+                MessageBox.Show($"Die Datei konnte nicht geladen werden:\n{ex.Message}",
+                    "Fehler beim Import", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            return null;
         }
 
         // Event-Handler für den Zeilenklick im DataGrid
