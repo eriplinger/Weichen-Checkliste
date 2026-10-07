@@ -248,20 +248,23 @@ namespace Weichen_Checkliste
             openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = ArbeitsvorratPath;
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() != true) return;
+
+            try
             {
                 string filePath = openFileDialog.FileName;
-                string extension = Path.GetExtension(filePath).ToLower();
-
-                // Unterscheidung zwischen CSV und Excel basierend auf der Dateiendung
-                if (extension == ".csv")
+                string extension = Path.GetExtension(filePath).ToLowerInvariant();
+                dt = extension switch
                 {
-                    dt = LoadCsv(filePath);
-                }
-                else if (extension == ".xlsx")
-                {
-                    dt = LoadExcel(filePath);
-                }
+                    ".csv" => LoadCsv(filePath),
+                    ".xlsx" => LoadExcel(filePath),
+                    _ => throw new InvalidDataException("Bitte eine CSV- oder XLSX-Datei auswählen.")
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Datei: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             if (dt == null)
@@ -289,11 +292,8 @@ namespace Weichen_Checkliste
         // Funktion zum Laden der CSV-Datei
         private DataTable LoadCsv(string filePath)
         {
-            // Registrierung von zusätzlichen Encodings, falls nötig (z.B. für Windows-1252)
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
             DataTable dt = new DataTable();
-            string[] lines = File.ReadAllLines(filePath, Encoding.GetEncoding("Windows-1252"));
+            string[] lines = CsvKodierung.ZeilenLesen(filePath);
 
             if (lines.Length > 0)
             {
