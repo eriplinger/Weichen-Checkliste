@@ -33,7 +33,6 @@ namespace Weichen_Checkliste
         private string WeichenwartungArbeitsvorratPath = "";
         private string WeichenwartungSyncPath = "";
         private string startmodus = "Inspektion";
-        private bool wartungssynchronisationLaeuft;
 
         private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
         private string AktuellerBefundpfad => IstWeichenwartung ? WeichenwartungRückmeldungsPath : RückmeldungsPath;
