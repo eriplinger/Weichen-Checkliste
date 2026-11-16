@@ -33,7 +33,6 @@ namespace Weichen_Checkliste
         private string WeichenwartungArbeitsvorratPath = "";
         private string WeichenwartungSyncPath = "";
         private string startmodus = "Inspektion";
-        private bool wartungssynchronisationLaeuft;
 
         private bool IstWeichenwartung => (Bearbeiter.SelectedItem as ComboBoxItem)?.Content?.ToString() == "Weichenwartung";
         private string AktuellerBefundpfad => IstWeichenwartung ? WeichenwartungRückmeldungsPath : RückmeldungsPath;
@@ -81,6 +80,7 @@ namespace Weichen_Checkliste
             };
             aktualisierungsTimer.Tick += Timer_Tick;
             aktualisierungsTimer.Start();
+            Loaded += async (_, _) => await UpdateFileStatusAsync();
         }
 
         private void StartmodusAnwenden()
@@ -499,44 +499,25 @@ namespace Weichen_Checkliste
             }
         }
 
-        private async Task SynchronisiereWeichenwartungAsync()
+        private readonly SemaphoreSlim syncSperre = new(1, 1);
+
+        private IReadOnlyList<SynchronisationsAuftrag> SynchronisationsAuftraege()
         {
-            if (wartungssynchronisationLaeuft) return;
-            if (string.IsNullOrWhiteSpace(WeichenwartungSyncPath))
+            return new[]
             {
-                WartungStatus.Text = "Wartung: Sync deaktiviert";
-                WartungStatus.ToolTip = "WeichenwartungSyncPath in settings.txt hinterlegen.";
-                return;
-            }
-            wartungssynchronisationLaeuft = true;
-            try
-            {
-                PruefeWartungspfade(true);
-                var fehler = new List<string>();
-                try
-                {
-                    string remoteAV = Path.Combine(WeichenwartungSyncPath, "50_WeichenwartungAV");
-                    await Task.Run(() => BefundDateien.ArbeitsvorratKopieren(remoteAV, WeichenwartungArbeitsvorratPath));
-                }
-                catch (Exception ex) { fehler.Add(ex.Message); }
-                try
-                {
-                    string remoteR = Path.Combine(WeichenwartungSyncPath, "60_WeichenwartungR");
-                    await Task.Run(() => BefundDateien.Synchronisieren(WeichenwartungRückmeldungsPath, remoteR));
-                }
-                catch (Exception ex) { fehler.Add(ex.Message); }
-                WartungStatus.Text = fehler.Count == 0 ? "Wartung: synchronisiert" : "Wartung: Sync unvollständig";
-                WartungStatus.ToolTip = fehler.Count == 0 ? null : string.Join("\n", fehler);
-            }
-            catch (Exception ex)
-            {
-                WartungStatus.Text = "Wartung: nicht synchronisiert";
-                WartungStatus.ToolTip = ex.Message;
-            }
-            finally
-            {
-                wartungssynchronisationLaeuft = false;
-            }
+                new SynchronisationsAuftrag("Inspektion: Arbeitsvorrat",
+                    Path.Combine(SyncPath, "10_Arbeitsvorbereitung"), ArbeitsvorratPath, true),
+                new SynchronisationsAuftrag("Inspektion: Befunde",
+                    Path.Combine(SyncPath, "20_Arbeitsnachbereitung"), RückmeldungsPath, false),
+                new SynchronisationsAuftrag("Inspektion: Bilder",
+                    Path.Combine(SyncPath, "40_Bilder"), BilderPath, false),
+                new SynchronisationsAuftrag("Wartung: Arbeitsvorrat",
+                    Path.Combine(WeichenwartungSyncPath, "50_WeichenwartungAV"),
+                    WeichenwartungArbeitsvorratPath, true),
+                new SynchronisationsAuftrag("Wartung: Befunde",
+                    Path.Combine(WeichenwartungSyncPath, "60_WeichenwartungR"),
+                    WeichenwartungRückmeldungsPath, false)
+            };
         }
 
         // Event-Handler für Neuen Befund
@@ -598,138 +579,48 @@ namespace Weichen_Checkliste
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await UpdateFileStatusAsync();
-            // Aktualisiere die Zeit in der Statusleiste
-            //StatusMessage.Text = $"Aktualisiert um {DateTime.Now:HH:mm}";
         }
 
         private async Task UpdateFileStatusAsync()
         {
-            // Wartungsordner nur im Wartungsmodus synchronisieren.
-            if (IstWeichenwartung) await SynchronisiereWeichenwartungAsync();
+            // Kein paralleler Sync, auch nicht durch schnelles Klicken auf "aktualisieren".
+            if (!await syncSperre.WaitAsync(0)) return;
             try
             {
-                if (Directory.Exists(SyncPath))
-                {
-                    isConnected = true;
-                    ConnectionStatus.Text = "Verbunden";
-                    await CopyRemoteFolderAsync();
-                    await MoveRemoteFolderAsync();
-                    StatusMessage.Text = $"Aktualisiert um {DateTime.Now:HH:mm}";
-                }
-                else
-                {
-                    HandleConnectionLost();
-                }
-            }
-            catch (Exception)
-            {
-                HandleConnectionLost();
-            }
+                var ergebnisse = await Task.Run(() =>
+                    SynchronisationsDienst.Ausfuehren(SynchronisationsAuftraege()));
+                var fehler = ergebnisse.Where(e => !e.Erfolgreich).ToList();
+                bool inspektionOk = ergebnisse.Where(e => e.Name.StartsWith("Inspektion:"))
+                    .All(e => e.Erfolgreich);
+                bool wartungOk = ergebnisse.Where(e => e.Name.StartsWith("Wartung:"))
+                    .All(e => e.Erfolgreich);
 
-            try
-            {
-                string befundpfad = AktuellerBefundpfad;
-                if (Directory.Exists(befundpfad))
-                {
+                ConnectionStatus.Text = fehler.Count == 0 ? "Verbunden" : "Teilweise / nicht verbunden";
+                StatusMessage.Text = fehler.Count == 0
+                    ? $"Synchronisiert um {DateTime.Now:HH:mm}"
+                    : $"Synchronisation: {fehler.Count} von {ergebnisse.Count} Datenflüssen fehlerhaft";
+                StatusMessage.ToolTip = fehler.Count == 0 ? null
+                    : string.Join("\n", fehler.Select(e => e.Name + ": " + e.Fehler));
+                WartungStatus.Text = wartungOk ? "Wartung: synchronisiert" : "Wartung: Sync unvollständig";
+                WartungStatus.ToolTip = wartungOk ? null
+                    : string.Join("\n", fehler.Where(e => e.Name.StartsWith("Wartung:"))
+                        .Select(e => e.Name + ": " + e.Fehler));
 
-                    // Anzahl der Dateien zählen
-                    var files = await Task.Run(() => Directory.GetFiles(befundpfad));
-                    FileCount.Text = files.Length.ToString();
-
-                }
-                else 
-                { 
-                    FileCount.Text = "0"; 
-                }
-                if (Directory.Exists(BilderPath))
-                {
-                    // Anzahl der Dateien zählen
-                    var files = await Task.Run(() => Directory.GetFiles(BilderPath));
-                    FotoCount.Text = files.Length.ToString();
-                }
-                else 
-                { 
-                    FotoCount.Text = "0"; 
-                }
+                FileCount.Text = Directory.Exists(AktuellerBefundpfad)
+                    ? Directory.GetFiles(AktuellerBefundpfad).Length.ToString() : "0";
+                FotoCount.Text = Directory.Exists(BilderPath)
+                    ? Directory.GetFiles(BilderPath).Length.ToString() : "0";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fehler im Ordner für die Befunde. Kein Zugriff möglich");
-            }  
-        }
-
-        private void HandleConnectionLost()
-        {
-            isConnected = false;
-            ConnectionStatus.Text = "Nicht verbunden";
-        }
-
-        private async Task CopyRemoteFolderAsync()
-        {
-            string remoteFolder = SyncPath + @"\10_Arbeitsvorbereitung"; // Pfad zum Remote-Ordner
-            string localFolder = ArbeitsvorratPath;       // Zielordner auf dem lokalen Rechner
-
-            if (Directory.Exists(remoteFolder) && Directory.Exists(localFolder))
-            {
-                try
-                {
-                    // Kopierprozess starten
-                    await Task.Run(() => FolderCopierer.CopyFolder(remoteFolder, localFolder));
-                    StatusMessage.Text = "Kopieren abgeschlossen.";
-                }
-                catch (Exception ex)
-                {
-                    StatusMessage.Text = $"Fehler: {ex.Message}";
-                }
+                ConnectionStatus.Text = "Nicht verbunden";
+                StatusMessage.Text = "Synchronisationsfehler";
+                StatusMessage.ToolTip = ex.ToString();
             }
-            else
+            finally
             {
-                StatusMessage.Text = "Remote-Ordner nicht erreichbar.";
+                syncSperre.Release();
             }
-        }
-
-        private async Task MoveRemoteFolderAsync()
-        {
-            string remoteFolder = SyncPath + @"\20_Arbeitsnachbereitung"; // Pfad zum Remote-Ordner
-            string remoteBilder = SyncPath + @"\40_Bilder"; // Pfad zum Remote-Ordner für Bilder
-            string localFolder = RückmeldungsPath;       // Zielordner auf dem lokalen Rechner
-            string localBilder = BilderPath;
-
-            if (Directory.Exists(remoteFolder) && Directory.Exists(localFolder))
-            {
-                try
-                {
-                    // Verschieben starten
-                    await Task.Run(() => FolderCopierer.MoveFolder(localFolder, remoteFolder));
-                    StatusMessage.Text = "Verschieben der Befunde abgeschlossen.";
-                }
-                catch (Exception ex)
-                {
-                    StatusMessage.Text = $"Fehler: {ex.Message}";
-                }
-            }
-            else
-            {
-                StatusMessage.Text = "Remote-Ordner für Befunde nicht erreichbar.";
-            }
-            if (Directory.Exists(remoteBilder) && Directory.Exists(localBilder))
-            {
-                try
-                {
-                    // Verschieben starten
-                    await Task.Run(() => FolderCopierer.MoveFolder(localBilder, remoteBilder));
-                    StatusMessage.Text = "Verschieben der Fotos abgeschlossen.";
-                }
-                catch (Exception ex)
-                {
-                    StatusMessage.Text = $"Fehler: {ex.Message}";
-                }
-            }
-            else
-            {
-                StatusMessage.Text = "Remote-Ordner für Bilder nicht erreichbar.";
-            }
-
         }
 
         private string GetNextFileNumber(string directory, string filePattern)
@@ -792,7 +683,7 @@ namespace Weichen_Checkliste
 
         private void UpdateStatus_Click(object sender, RoutedEventArgs e)
         {
-            UpdateFileStatusAsync();
+            _ = UpdateFileStatusAsync();
         }
     }
 }
