@@ -69,26 +69,64 @@ Remote-Basisordner mit den Unterordnern `50_WeichenwartungAV` und
 `60_WeichenwartungR`. Beide Remote-Unterordner müssen bereits existieren.
 Alle Pfade müssen absolut sein und von den Inspektionsordnern getrennt bleiben.
 
-Alle 60 Sekunden sowie über „aktualisieren“ wird der Wartungs-Arbeitsvorrat aus
-`WeichenwartungSyncPath\50_WeichenwartungAV` lokal kopiert (mit Aktualisierung
-vorhandener Dateien). Lokale Wartungs-Rückmeldungen werden separat nach
-`WeichenwartungSyncPath\60_WeichenwartungR` verschoben. Vorhandene Remote-Befunde
-bleiben erhalten; gleiche Namen erhalten einen nummerierten Zusatz. Scheitert
-eine Richtung, wird die andere trotzdem versucht. Offline bleiben lokale
-Dateien erhalten. Ein leerer `WeichenwartungSyncPath` deaktiviert die Wartungs-
-Synchronisation. Sie läuft nur bei ausgewähltem Bearbeiter „Weichenwartung“.
+## Synchronisation (Inspektion und Wartung)
 
-Befundzähler und „Befunde im Ordner“ verwenden nur im Wartungsmodus den Wartungs-
-Rückmeldungsordner. Inspektionspfade und Inspektions-Synchronisation bleiben
-unverändert. Der Wartungsstatus steht separat in der Statusleiste; Fehlerdetails
-stehen im Tooltip.
+Beim Start der WPF-Anwendung, dann alle 60 Sekunden und über **aktualisieren**
+werden **alle fünf Datenflüsse** bearbeitet, unabhängig von der Bearbeiterauswahl:
 
-Bestehende `settings.txt` werden nicht automatisch geändert. Den bisherigen
-`WeichenwartungPath` durch die beiden neuen lokalen Pfade ersetzen und die
-Anwendung neu starten. Bereits gespeicherte Wartungsbefunde bei geschlossener
-Anwendung in den neuen lokalen Rückmeldungsordner verschieben, damit sie weiter
-synchronisiert werden. Auch vorhandene Remote-Wartungsbefunde gehören in den
-neuen Remote-Unterordner `60_WeichenwartungR`.
+| Daten | Remote | Lokal | Richtung |
+| --- | --- | --- | --- |
+| Inspektions-Arbeitsvorrat | `SyncPath\\10_Arbeitsvorbereitung` | `ArbeitsvorratPath` | Remote -> Lokal |
+| Inspektionsbefunde | `SyncPath\\20_Arbeitsnachbereitung` | `RückmeldungsPath` | Lokal -> Remote |
+| Bilder | `SyncPath\\40_Bilder` | `BilderPath` | Lokal -> Remote |
+| Wartungs-Arbeitsvorrat | `WeichenwartungSyncPath\\50_WeichenwartungAV` | `WeichenwartungArbeitsvorratPath` | Remote -> Lokal |
+| Wartungsbefunde | `WeichenwartungSyncPath\\60_WeichenwartungR` | `WeichenwartungRückmeldungsPath` | Lokal -> Remote |
+
+Die Arbeitsvorräte werden gespiegelt: Die Remote-Dateien sind führend, fehlende
+Dateien werden lokal entfernt, und geänderte Dateien werden ersetzt. Bei fehlendem
+Remote-Zugriff bleibt der lokale Bestand erhalten. Änderungen werden über
+SHA-256-Inhaltsvergleich festgestellt.
+
+Rückmeldungen und Bilder werden zunächst in eine temporäre Datei auf dem
+Remote-Share kopiert, anhand ihrer Prüfsumme kontrolliert und anschließend
+unter dem **unveränderten Dateinamen** veröffentlicht. Gleichnamige Dateien
+werden durch den zuletzt **abgeschlossenen Upload** ersetzt. Erst nach der
+Veröffentlichung wird die lokale Quelldatei gelöscht. Das lokale Stammverzeichnis
+bleibt bestehen. Bei Fehlern bleibt die noch nicht erfolgreich übertragene lokale
+Datei erhalten. Ein Absturz nach dem Remote-Upload, aber vor der lokalen
+Löschung kann zur erneuten Übertragung derselben Datei führen; das ist für
+den vorgegebenen Nachweis-Usecase akzeptiert.
+
+Alle Datenflüsse haben unabhängige Fehlerbehandlung. Statusleiste und Tooltip
+zeigen unvollständige Synchronisation an. Eine laufende Synchronisation wird
+nicht parallel gestartet. Die Synchronisation läuft nur, solange die
+WPF-Anwendung geöffnet ist.
+
+Alle Remote-Unterverzeichnisse müssen bereits vorhanden und mit den
+notwendigen Rechten erreichbar sein. Die Pfade aus `settings.txt` müssen
+absolut sein; Quell- und Zielverzeichnisse dürfen sich nicht überlappen.
+Bei gemappten Netzlaufwerken (z. B. U:) muss das Mapping in der
+Windows-Anmeldesitzung der Anwendung verfügbar sein.
+
+**Installations- und Produktivkonfiguration:** Die MSI-Vorlagendatei wird
+nicht als produktive `settings.txt` verwendet. Die Anwendung liest weiterhin
+`C:\ProgramData\Weichen\settings.txt`. Diese Datei darf bei einem Update
+nicht überschrieben werden. Bestehende Dateien werden nicht automatisch
+migriert; insbesondere müssen die Wartungsschlüssel aus der obenstehenden
+Tabelle vorhanden sein.
+
+### Lokale Integrationstests
+
+Auf einem Rechner mit installiertem .NET 8 SDK:
+
+```powershell
+dotnet run --project SyncTests/SyncTests.csproj
+```
+
+Diese Tests decken Spiegelung mit zwei Clients, Aktualisierung, Löschungen,
+Offlineerhalt und den Upload gleichnamiger Befunde ab. Zusätzlich sind
+manuelle Tests mit echtem Netzlaufwerk und geöffneten Excel-Dateien erforderlich.
+Die Tests wurden noch nicht in einer Windows-/SMB-Umgebung ausgeführt.
 
 Attribution
 <a href="https://www.flaticon.com/free-icons/train" title="train icons">Train icons created by Aranagraphics - Flaticon</a>
